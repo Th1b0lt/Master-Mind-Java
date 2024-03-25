@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Combinaison{
     public Pion combinaison [];
     protected final int taille;
