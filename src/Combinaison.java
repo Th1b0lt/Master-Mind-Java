@@ -1,4 +1,7 @@
+
+package Projet.source.combinaison;
 import java.util.Scanner;
+
 
 public class Combinaison{
     public Pion combinaison [];
@@ -26,8 +29,8 @@ public class Combinaison{
             }
             else {
                 for (int j=0;j<this.taille;j++){
-                    if (!alreadySeen[j] && this.combinaison[i].couleur.equals(otherCombinaison.combinaison[j].couleur)){
-                        goodcolor++;
+                    if (!alreadySeen[j] && this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur())){
+                        goodColor++;
                         alreadySeen[j]=true;
                         break;
                     }
