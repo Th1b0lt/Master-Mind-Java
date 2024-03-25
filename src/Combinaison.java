@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Combinaison{
     public Pion combinaison [];
-    protected static final int taille;
+    private final int taille;
     public Combinaison(int taille){
         this.taille=taille;
         combinaison= new Pion [taille];
@@ -17,35 +17,50 @@ public class Combinaison{
             combinaison[i] = new Pion(i,scanner.nextLine());
         }
     }
-    public int[] Compare(Combinaison otherCombinaison){
+    public Object[] Compare(Combinaison otherCombinaison){
         int wellPlaced=0;
         int goodColor=0;
         private boolean alreadySeen [] =new boolean[this.taille];
-        int retour[]=new int[2];
+        ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
+        ArrayList<Pion> bonneCouleur= new ArrayList<>();
         for (int i=0;i<this.taille;i++){
             if (this.combinaison[i].equals(otherCombinaison.combinaison[i])){
                 wellPlaced++;
                 alreadySeen[i]=true;
+                pionsBienPlacees.add(this.combinaison[i]);
             }
             else {
                 for (int j=0;j<this.taille;j++){
                     if (!alreadySeen[j] && this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur())){
                         goodColor++;
                         alreadySeen[j]=true;
+                        bonneCouleur.add(this.combinaison[i]);
                         break;
                     }
                 }
             }
         }
-        retour[0]=wellPlaced;
-        retour[1]=goodColor;
-        return retour;
+        Object[] result = new Object[4];
+        result[0] = pionsBienPlacees;
+        result[1] = bonneCouleur;
+        result[2] = wellPlaced;
+        result[3] = goodColor;
+        
+        return result;
+        
     }
 
-    public void afficheCompare(Combinaison otherCombinaison){
-        int affichage[]=Compare(otherCombinaison);
-        System.out.println("Nombre de pions bien placés: " + affichage[0]);
-        System.out.println("Nombre de bonnes couleurs (mal placées): " + affichage[1]);
+    public void afficheCompareDifficile(Combinaison otherCombinaison){
+        Object affichage[]=Compare(otherCombinaison);
+        System.out.println("Nombre de pions bien placés: " + affichage[2]);
+        System.out.println("Nombre de bonnes couleurs (mal placées): " + affichage[3]);
+    }
+    public void afficheComparefacile(Combinaison otherCombinaison){
+        Object affichage[]=Compare(otherCombinaison);
+        System.out.println("Liste des pions bien placés : "+ affichage[0]);
+        System.out.println("Pions de La bonne couleur : "+affichage[1]);
+        System.out.println("Nombre de pions bien placés: " + affichage[2]);
+        System.out.println("Nombre de bonnes couleurs (mal placées): " + affichage[3]);
     }
     @Override
     public String toString(){
@@ -53,5 +68,6 @@ public class Combinaison{
         for (int i=0;i<taille;i++){
             retour+="|" + combinaison[i].getCouleur()+"|";
         }
+        return retour;
     }
 }
