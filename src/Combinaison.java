@@ -49,8 +49,9 @@ public class Combinaison{
     }
     @Override
     public String toString(){
+        String retour="";
         for (int i=0;i<taille;i++){
-            System.out.println("|" + combinaison[i].getCouleur()+"|");
+            retour+="|" + combinaison[i].getCouleur()+"|";
         }
     }
 }
