@@ -17,7 +17,7 @@ public class Combinaison{
             combinaison[i] = new Pion(i,scanner.nextLine());
         }
     }
-    public Object[] Compare(Combinaison otherCombinaison){
+    private Object[] Compare(Combinaison otherCombinaison){
         int wellPlaced=0;
         int goodColor=0;
         private boolean alreadySeen [] =new boolean[this.taille];
