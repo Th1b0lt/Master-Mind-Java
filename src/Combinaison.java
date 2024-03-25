@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Combinaison{
     public Pion combinaison [];
-    protected final int taille;
+    protected static final int taille;
     public Combinaison(int taille){
         this.taille=taille;
         combinaison= new Pion [taille];
@@ -46,5 +46,11 @@ public class Combinaison{
         int affichage[]=Compare(otherCombinaison);
         System.out.println("Nombre de pions bien placés: " + affichage[0]);
         System.out.println("Nombre de bonnes couleurs (mal placées): " + affichage[1]);
+    }
+    @Override
+    public String toString(){
+        for (int i=0;i<taille;i++){
+            System.out.println("|" + combinaison[i].getCouleur()+"|");
+        }
     }
 }
