@@ -8,6 +8,5 @@ public enum Couleur{
     VIOLET,
     ORANGE,
     CYAN,
-    NOIR,        
-
+    NOIR  
 }
