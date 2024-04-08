@@ -1,6 +1,6 @@
 package projet.source.projet;
 
-public class Main{
+public class Test{
     public static void main(String[] args){
         Couleur r=Couleur.ROUGE;
 
