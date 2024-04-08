@@ -10,24 +10,24 @@ public class Plateau {
     private ArrayList<Couleur> listeCouleurs;
     private final Combinaison codeSecret;
     private Combinaison[] plateau;
-    private int d;
+    private int difficulty;
     private int nbrCouleurs=8;
     private int nbrPionts=4;
     private boolean memeCouleur=true;
     private int nbrCoups=12;
 
     public Plateau(){
-        int choix,d;
+        int choix,difficulty;
         ArrayList<Couleur> listeComplete = new ArrayList<>(Arrays.asList(Couleur.values()));
         Collections.shuffle(listeComplete);
-        d=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant)\\n" + //
-                        ": Facile:0 \\n" + //
-                        " Normal:1 \\n" + //
-                        " Difficile:2\\n" + //
-                        " Très difficile:3\\n" + //
-                        " Personnalisé:4"));
-        this.d=d;
-        switch(d){
+        difficulty=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant)\\n" + //
+                        ": Facile:0 \n" + //
+                        " Normal:1 \n" + //
+                        " Difficile:2\n" + //
+                        " Très difficile:3\n" + //
+                        " Personnalisé:4\n"));
+        this.difficulty=difficulty;
+        switch(difficulty){
             case 0:
                 nbrCouleurs=6;
                 memeCouleur=false;
