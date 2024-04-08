@@ -1,4 +1,4 @@
-package Projet.source.couleur;
+package Projet.source.projet;
 
 public enum Couleur{
     ROUGE("\u001b[31m") ,

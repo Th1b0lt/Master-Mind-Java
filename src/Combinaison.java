@@ -1,6 +1,7 @@
 
-package Projet.source.combinaison;
+package Projet.source.projet;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Combinaison{
@@ -14,7 +15,7 @@ public class Combinaison{
             //Input utilisateur pour creer des pions
             System.out.println("Couleur du pion " + (i + 1) + ": ");
             // Assuming Pion class has constructor Pion(String input) to initialize with user input
-            combinaison[i] = new Pion(i,scanner.nextLine());
+            combinaison[i] = new Pion(scanner.nextLine());
         }
     }
     private Object[] Compare(Combinaison otherCombinaison){

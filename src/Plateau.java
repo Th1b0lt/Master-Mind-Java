@@ -1,4 +1,4 @@
-package Projet.source.plateau;
+package Projet.source.projet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

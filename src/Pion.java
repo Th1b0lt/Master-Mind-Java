@@ -1,5 +1,4 @@
-package Projet.source.couleur;
-
+package Projet.source.projet;
 public class Pion{
     private Couleur c;
 
