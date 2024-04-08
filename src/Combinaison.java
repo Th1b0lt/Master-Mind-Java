@@ -1,7 +1,7 @@
 
-package Projet.source.combinaison;
+package Projet.source.projet;
 import java.util.Scanner;
-
+/* 
 
 public class Combinaison{
     public Pion combinaison [];
@@ -70,4 +70,4 @@ public class Combinaison{
         }
         return retour;
     }
-}
+}*/

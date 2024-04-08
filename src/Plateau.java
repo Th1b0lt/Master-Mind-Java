@@ -1,4 +1,4 @@
-package Projet.source.plateau;
+package Projet.source.projet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Plateau {
     private ArrayList<Couleur> listeCouleurs;
-    private final Combinaison codeSecret;
-    private Combinaison[] plateau;
+   // private final Combinaison codeSecret;
+   // private Combinaison[] plateau;
     private int d;
     private int nbrCouleurs=8;
     private int nbrPionts=4;
@@ -20,12 +20,12 @@ public class Plateau {
         int choix,d;
         ArrayList<Couleur> listeComplete = new ArrayList<>(Arrays.asList(Couleur.values()));
         Collections.shuffle(listeComplete);
-        d=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant)\\n" + //
-                        ": Facile:0 \\n" + //
-                        " Normal:1 \\n" + //
-                        " Difficile:2\\n" + //
-                        " Très difficile:3\\n" + //
-                        " Personnalisé:4"));
+        d=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant)\n" + //
+                        ": Facile:0 \n" + //
+                        " Normal:1 \n" + //
+                        " Difficile:2\n" + //
+                        " Très difficile:3\n" + //
+                        " Personnalisé:4\n"));
         this.d=d;
         switch(d){
             case 0:
@@ -54,8 +54,5 @@ public class Plateau {
     }
 
 
-    @Override
-    public String toString(){
-
-    }
+   
 }
