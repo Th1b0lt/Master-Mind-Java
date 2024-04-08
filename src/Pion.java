@@ -1,6 +1,5 @@
 package projet.source.projet;
 
-
 public class Pion{
     private Couleur c;
 

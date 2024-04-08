@@ -6,6 +6,11 @@ public class Main{
 
         Plateau p= new Plateau();
         r.afficherTexteEnCouleur("Hello");
+<<<<<<< HEAD
 
     }
+=======
+    }
+
+>>>>>>> 9d44384e08d0d170e9708710b4d96febef3a3a7f
 }
