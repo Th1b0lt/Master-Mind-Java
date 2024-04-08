@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Plateau {
     private ArrayList<Couleur> listeCouleurs;
-    //private final Combinaison codeSecret;
-    //private Combinaison[] plateau;
+    private final Combinaison codeSecret;
+    private Combinaison[] plateau;
     private int difficulty;
     private int nbrCouleurs=8;
     private int nbrPionts=4;
@@ -50,6 +50,8 @@ public class Plateau {
 
         }
         listeCouleurs = new ArrayList<>(listeComplete.subList(0, nbrCouleurs));
+        this.codeSecret= new Combinaison(nbrPionts);
+        this.plateau= new Combinaison[nbrCoups];
 
     }
 
