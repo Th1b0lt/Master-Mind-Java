@@ -20,7 +20,7 @@ public class Combinaison{
     private Object[] Compare(Combinaison otherCombinaison){
         int wellPlaced=0;
         int goodColor=0;
-        private boolean alreadySeen [] =new boolean[this.taille];
+        boolean alreadySeen[] = new boolean[this.taille];
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
         ArrayList<Pion> bonneCouleur= new ArrayList<>();
         for (int i=0;i<this.taille;i++){
