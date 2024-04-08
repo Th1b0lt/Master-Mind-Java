@@ -1,6 +1,9 @@
 package Projet.source.projet;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 570c023055558a4d5c81e8766e32042b46b98d9a
 public class Pion{
     private Couleur c;
 

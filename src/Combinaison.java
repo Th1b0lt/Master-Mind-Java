@@ -1,7 +1,8 @@
 
 package Projet.source.projet;
 import java.util.Scanner;
-/* 
+
+import java.util.ArrayList;
 
 public class Combinaison{
     public Pion combinaison [];
@@ -14,13 +15,13 @@ public class Combinaison{
             //Input utilisateur pour creer des pions
             System.out.println("Couleur du pion " + (i + 1) + ": ");
             // Assuming Pion class has constructor Pion(String input) to initialize with user input
-            combinaison[i] = new Pion(i,scanner.nextLine());
+            combinaison[i] = new Pion(scanner.nextLine());
         }
     }
     private Object[] Compare(Combinaison otherCombinaison){
         int wellPlaced=0;
         int goodColor=0;
-        private boolean alreadySeen [] =new boolean[this.taille];
+        boolean alreadySeen[] = new boolean[this.taille];
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
         ArrayList<Pion> bonneCouleur= new ArrayList<>();
         for (int i=0;i<this.taille;i++){
@@ -70,4 +71,4 @@ public class Combinaison{
         }
         return retour;
     }
-}*/
+}

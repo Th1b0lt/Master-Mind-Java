@@ -7,5 +7,5 @@ public class Test{
         Plateau p= new Plateau();
         r.afficherTexteEnCouleur("Hello");
 
-    }
+
 }
