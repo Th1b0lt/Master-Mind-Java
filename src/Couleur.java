@@ -27,6 +27,16 @@ public enum Couleur{
     public String getCodeCouleur() {
         return codeCouleur;
     }
+
+    public static Couleur getCouleurByValue(int value) {
+        for (Couleur couleur : Couleur.values()) {
+            if (couleur.value == value) {
+                return couleur;
+            }
+        }
+        // Si aucune couleur correspondante n'est trouvée, renvoyer null ou gérer l'erreur selon le cas
+        return null;
+    }
      // Méthode pour afficher la couleur dans la console
      public void afficherTexteEnCouleur(String texte) {
         System.out.println(codeCouleur + texte + "\u001b[0m");

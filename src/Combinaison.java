@@ -3,7 +3,7 @@ package Projet.source.projet;
 import java.util.Scanner;
 
 import java.util.ArrayList;
-
+/* 
 public class Combinaison{
     public Pion combinaison [];
     private final int taille;
@@ -72,3 +72,4 @@ public class Combinaison{
         return retour;
     }
 }
+*/
