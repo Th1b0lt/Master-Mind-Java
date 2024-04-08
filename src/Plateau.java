@@ -8,6 +8,9 @@ import java.util.Random;
 
 public class Plateau {
     private ArrayList<Couleur> listeCouleurs;
+    private Combinaison combinaisonsecrete;
+    private ArrayList<Combinaison> listedesproposition;
+    private
 
 
     public Plateau(int nbrCouleur){
