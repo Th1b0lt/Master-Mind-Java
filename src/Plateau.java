@@ -54,8 +54,5 @@ public class Plateau {
     }
 
 
-    @Override
-    public String toString(){
-
-    }
+   
 }
