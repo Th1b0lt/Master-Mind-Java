@@ -1,4 +1,4 @@
-package Projet.source.projet;
+package projet.source.projet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Plateau {
     private ArrayList<Couleur> listeCouleurs;
-    private final Combinaison codeSecret;
-    private Combinaison[] plateau;
+    //private final Combinaison codeSecret;
+    //private Combinaison[] plateau;
     private int difficulty;
     private int nbrCouleurs=8;
     private int nbrPionts=4;

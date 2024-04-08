@@ -1,4 +1,4 @@
-package Projet.source.projet;
+package projet.source.projet;
 
 
 public class Pion{
