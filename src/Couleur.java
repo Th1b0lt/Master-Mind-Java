@@ -1,7 +1,7 @@
 package Projet.source.couleur;
 
 public enum Couleur{
-    ROUGE,
+    ROUGE("\u001b[31m") ,
     BLEU,
     VERT,
     JAUNE,

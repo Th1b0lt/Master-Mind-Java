@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Combinaison{
     public Pion combinaison [];
     protected final int taille;
+
     public Combinaison(int taille){
         this.taille=taille;
         combinaison= new Pion [taille];
@@ -16,6 +17,8 @@ public class Combinaison{
             combinaison[i] = new Pion(i,scanner.nextLine());
         }
     }
+
+    
     public int[] Compare(Combinaison otherCombinaison){
         int wellPlaced=0;
         int goodColor=0;
