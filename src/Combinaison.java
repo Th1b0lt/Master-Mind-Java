@@ -7,9 +7,13 @@ import java.util.ArrayList;
 public class Combinaison{
     private Pion combinaison [];
     private final int taille;
+    public Combinaison(Pion combinaison []){
+        this.combinaison=combinaison;
+    }
     public Combinaison(int taille){
         this.taille=taille;
         combinaison= new Pion [taille];
+
         Scanner scanner = new Scanner(System.in);
         for (int i=0;i<taille;i++){
             //Input utilisateur pour creer des pions
