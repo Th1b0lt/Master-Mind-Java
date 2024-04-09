@@ -1,4 +1,4 @@
-package Projet.source.projet;
+package projet.source.projet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,24 +38,24 @@ public class Plateau {
             case 3:
                 nbrPionts=5;
                 break;
-            case 4:
+            default:
                 choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de couleur(6 ou 8) :"));
                 while(choix<6 || choix>8){
                     choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de couleur(6 ou 8) :"));
                 }
                 nbrCouleurs=choix;
                 choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de pions a devinez(4 ou 5) :"));
-                while(choix!=4 || choix!=5){
+                while(choix!=4 && choix!=5){
                     choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de pions a devinez(4 ou 5) :"));
                 }
                 nbrPionts=choix;
                 choix=Integer.parseInt(System.console().readLine("Choisissez votre nombre de coups(10 ou 12) :"));
-                while(choix!=10 || choix!=12){
+                while(choix<10 || choix>12){
                     choix=Integer.parseInt(System.console().readLine("Choisissez votre nombre de coups(10 ou 12) :"));
                 }
                 nbrCoups=choix;
                 choix=Integer.parseInt(System.console().readLine("Choisissez si les points peuvent avoir la meme couleur, 0 pour non 1 pour oui :"));
-                while(choix!=1 || choix!=0){
+                while(choix!=1 && choix!=0){
                     choix=Integer.parseInt(System.console().readLine("Choisissez si les points peuvent avoir la meme couleur, 0 pour non 1 pour oui :"));
                 }
                 if(choix==0){
@@ -65,38 +65,42 @@ public class Plateau {
 
         }
         listeCouleurs = new ArrayList<>(listeComplete.subList(0, nbrCouleurs));
+        this.codeSecret= new Combinaison(nbrPionts);
+        this.plateau= new Combinaison[nbrCoups];
 
     }
     public void afficheCouleur(){
         if(nbrCouleurs==6){
-            System.out.println("Choisissez la couleur des points, les couleurs sont :\n" + //
-        "\u001b[31m• \n" + //
-        "\u001B[34m• \n" + //
-        "\u001B[32m• \n" + //
-        "\u001B[33m• \n" + //
-        "\u001B[35m• \n" + //
-        "\u001B[37m•\u001B[37m");
+            System.out.println("Choisissez la couleur des points (il faudra entrer le nombre correspondant) , les couleurs sont  :\n" + //
+        "1: \u001b[31m\u2B24\n" + //
+        "\u001B[37m2: \u001B[34m\u2B24\n" + //
+        "\u001B[37m3: \u001B[32m\u2B24\n" + //
+        "\u001B[37m4: \u001B[33m\u2B24\n" + //
+        "\u001B[37m5: \u001B[35m\u2B24\n" + //
+        "\u001B[37m6: \033[95m\u2B24\u001B[37m \n");
         }
         else{
-            System.out.println("Choisissez la couleur des points, les couleurs sont :\n" + //
-        "\u001b[31m• \n" + //
-        "\u001B[34m• \n" + //
-        "\u001B[32m• \n" + //
-        "\u001B[33m• \n" + //
-        "\u001B[35m• \n" + //
-        "\u001B[37m• \n"+ //
-        "\u001B[36m• \n"+ //
-        "\u001B[30m•\\u001B[37m \n");
+            System.out.println("Choisissez la couleur des points (il faudra entrer le nombre correspondant) , les couleurs sont :\n" + //
+        "1: \u001b[31m\u2B24\n" + //
+        "\u001B[37m2: \u001B[34m\u2B24\n" + //
+        "\u001B[37m3: \u001B[32m\u2B24\n" + //
+        "\u001B[37m4: \u001B[33m\u2B24\n" + //
+        "\u001B[37m5: \u001B[35m\u2B24\n" + //
+        "\u001B[37m6: \u001B[37m\u2B24\n"+ //
+        "\u001B[37m7: \u001B[36m\u2B24\n"+ //
+        "\u001B[37m8: \033[95m\u2B24\u001B[37m \n");
         }
     }
+    
     @Override
     public String toString(){
         String result="";
         for(int i=0;i<plateau.length;i++){
-            result+=toString(plateau[i])+"\n";
+            result+=plateau[i].toString()+"\n";
         }
         return result;
 
     }
+    
    
 }

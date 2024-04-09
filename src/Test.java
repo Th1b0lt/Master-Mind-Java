@@ -1,7 +1,5 @@
-package Projet.source.projet;
+package projet.source.projet;
 
-import Projet.source.projet.Couleur;
-import Projet.source.projet.Plateau;
 
 public class Test{
     public static void main(String[] args){

@@ -1,4 +1,4 @@
-package Projet.source.projet;
+package projet.source.projet;
 
 public enum Couleur{
     ROUGE(1, "\u001b[31m") ,
@@ -6,9 +6,9 @@ public enum Couleur{
     VERT(3, "\u001B[32m"),
     JAUNE(4, "\u001B[33m"),
     VIOLET(5, "\u001B[35m"),
-    WHITE(6, "\u001B[37m"),
+    BLANC(6, "\u001B[37m"),
     CYAN(7, "\u001B[36m"),
-    NOIR(8, "\u001B[30m");
+    ROSE(8, "\033[95m");
     private final int value;
     private final String codeCouleur;
 
