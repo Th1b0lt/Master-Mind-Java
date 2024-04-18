@@ -6,9 +6,10 @@ public enum Couleur{
     VERT(3, "\u001B[32m"),
     JAUNE(4, "\u001B[33m"),
     VIOLET(5, "\u001B[35m"),
-    BLANC(6, "\u001B[37m"),
+    ROSE(6, "\033[95m"),
     CYAN(7, "\u001B[36m"),
-    ROSE(8, "\033[95m");
+    BLANC(8, "\u001B[37m");
+
     private final int value;
     private final String codeCouleur;
 
