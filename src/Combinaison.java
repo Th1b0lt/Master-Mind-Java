@@ -102,7 +102,7 @@ public class Combinaison{
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
         ArrayList<Pion> bonneCouleur= new ArrayList<>();
         for (int i=0;i<this.taille;i++){
-            if (this.combinaison[i].equals(otherCombinaison.combinaison[i])){
+            if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i])==1){
                 wellPlaced++;
                 alreadySeen[i]=true;
                 pionsBienPlacees.add(this.combinaison[i]);
@@ -131,8 +131,8 @@ public class Combinaison{
     public boolean afficheCompareDifficile(Combinaison otherCombinaison){
         Object comparaison[]=compare(otherCombinaison);
         System.out.println("Nombre de pions bien placés: " + comparaison[2]);
-        System.out.println("Nombre de bonnes couleurs (mal placées): " + comparaison[3]);
-        if((int)comparaison[2]==4 && (int)comparaison[3]==4){
+        System.out.println("Nombre de bonnes couleurs mal placées: " + comparaison[3]);
+        if((int)comparaison[2]==taille){
             return true;
         }
         return false;
@@ -142,8 +142,8 @@ public class Combinaison{
         System.out.println("Liste des pions bien placés : "+ comparaison[0]);
         System.out.println("Pions de La bonne couleur : "+comparaison[1]);
         System.out.println("Nombre de pions bien placés: " + comparaison[2]);
-        System.out.println("Nombre de bonnes couleurs (mal placées): " + comparaison[3]);
-        if((int)comparaison[2]==4 && (int)comparaison[3]==4){
+        System.out.println("Nombre de bonnes couleurs mal placées: " + comparaison[3]);
+        if((int)comparaison[2]==taille){
             return true;
         }
         return false;
@@ -158,5 +158,6 @@ public class Combinaison{
         }
         return retour;
     }
+
 }
  

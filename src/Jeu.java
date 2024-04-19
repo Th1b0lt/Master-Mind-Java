@@ -81,7 +81,7 @@ public class Jeu {
     public void inGame(){
             Combinaison combinaison;
             boolean res;
-            System.out.println("Vous avez perdu...\n \n La solution étais :  " + codeSecret.toString());
+            System.out.println(codeSecret.toString());
             System.out.println("Tour " + (numTour +1 ) + " / " + nbrCoups);
             combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
             p.ajouterLigne(numTour, combinaison);
@@ -91,7 +91,12 @@ public class Jeu {
             while (!fin && numTour < nbrCoups) {
                 clearConsole();
                 System.out.println("Resultat du tour précédent :\n");
-                res=combinaison.afficheComparefacile(codeSecret);
+                if(difficulty==0){
+                    res=combinaison.afficheComparefacile(codeSecret);
+                }
+                else{
+                    res=combinaison.afficheCompareDifficile(codeSecret);
+                }
                 if(res==true){
                     fin=true;
                     break;
@@ -111,11 +116,16 @@ public class Jeu {
         
 
             }
-            // Affiche le plateau final après la fin du jeu
-            System.out.println("\nPlateau final :\n" + p.toString());
+            clearConsole();
             if(!fin){
                 System.out.println("Vous avez perdu...\n \n La solution étais :  " + codeSecret.toString());
             }
+            else{
+                System.out.println("Bravo vous avez gagné !" );
+
+            }
+            System.out.println("\nPlateau final :\n" + p.toString());
+
 
         }
     
@@ -125,23 +135,23 @@ public class Jeu {
     public void afficheCouleur(){
         if(nbrCouleurs==6){
             System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont  :\n" + //
-        "1: \u001b[31m\u2B24 " + //
-        "\u001B[37m2: \u001B[34m\u2B24 " + //
+        "1: \u001b[31m\u2B24  " + //
+        "\u001B[37m2: \u001B[34m\u2B24  " + //
         "\u001B[37m3: \u001B[32m\u2B24\n" + //
-        "\u001B[37m4: \u001B[33m\u2B24 " + //
-        "\u001B[37m5: \u001B[35m\u2B24 " + //
+        "\u001B[37m4: \u001B[33m\u2B24  " + //
+        "\u001B[37m5: \u001B[35m\u2B24  " + //
         "\u001B[37m6: \033[95m\u2B24\u001B[37m \n");
         }
         else{
             System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont :\n" + //
-        "1: \u001b[31m\u2B24 " + //
-        "\u001B[37m2: \u001B[34m\u2B24 " + //
-        "\u001B[37m3: \u001B[32m\u2B24 " + //
+        "1: \u001b[31m\u2B24  " + //
+        "\u001B[37m2: \u001B[34m\u2B24  " + //
+        "\u001B[37m3: \u001B[32m\u2B24  " + //
         "\u001B[37m4: \u001B[33m\u2B24\n" + //
-        "\u001B[37m5: \u001B[35m\u2B24 " + //
-        "\u001B[37m6: \u001B[37m\u2B24 "+ //
-        "\u001B[37m7: \u001B[36m\u2B24 "+ //
-        "\u001B[37m8: \033[95m\u2B24\u001B[37m \n");
+        "\u001B[37m5: \u001B[35m\u2B24  " + //
+        "\u001B[37m6: \033[95m\u2B24\u001B[37m  " + //
+        "\u001B[37m7: \u001B[36m\u2B24  "+ //
+        "\u001B[37m8: \u001B[37m\u2B24 \n");
         }
     }
 }
