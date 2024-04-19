@@ -1,16 +1,67 @@
 package projet.source.projet;
 
 public class Menu {
-    private boolean multi=false;
     private boolean jouer=true;
+
     public Menu(){
         while(jouer){
             System.out.println("\n \nBIENVENUE DANS LE JEU DU MASTERMIND\n \n");
-            afficherRegle();
-            Jeu j= new Jeu();
-            j.inGame();
+            if(System.console().readLine("Voulez vous rappelez les règles du jeu ? (o/n)")=="o"){
+                afficherRegle();
+            }
+            if(System.console().readLine("Partie solo ou multijoueur ? (s/m)")=="m"){
+                clearConsole();
+                jeuMulti();
+            }
+            else{
+                clearConsole();
+                if(System.console().readLine("Voulez vous charger une partie existante ? (o/n)")=="o"){
+                    //
+                    //TODO
+                    //
+                }
+                else{
+                    System.out.println("Nouvelle partie :\n");
+                    lancerPartie();
+                }
+            }
+            if(System.console().readLine("Voulez vous refaire une partie ? (o/n)")=="n"){
+                jouer=false;
+                System.out.println("Fin du jeu, merci pour votre temps !");
+            };
         }
 
+    }
+    
+    private void clearConsole() {
+        final String ESC = "\033[";
+        System.out.print (ESC + "2J");
+        System.out.print (ESC + "0;0H");
+        System.out.flush();
+    }
+
+    public int lancerPartie(){
+        int nbrCoupsJouer;
+        Jeu j= new Jeu();
+        nbrCoupsJouer=j.inGame();
+        return nbrCoupsJouer;
+    }
+
+    public void jeuMulti(){
+        int partie1,partie2;
+        Jeu j = new Jeu();
+        System.out.println("Mode multijoueur, deux parties seront jouées, le joueur avec le moins de coup gagne la partie. Bonne chance\n");
+        partie1=j.inGame();
+        partie2=j.inGame();
+        if(partie1==partie2){
+            System.out.println("Egalité bravo à vous deux !");
+        }
+        else if(partie1>partie2){
+            System.out.println("Le premier joueur à gagné, bravo à lui");
+        }
+        else{
+            System.out.println("Le second joueur à gagné, bravo à lui");
+        }
     }
 
     public void afficherRegle(){

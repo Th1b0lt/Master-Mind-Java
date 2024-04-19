@@ -71,13 +71,13 @@ public class Jeu {
 
         afficheCouleur();
     }
-    public void clearConsole() {
+    private void clearConsole() {
         final String ESC = "\033[";
         System.out.print (ESC + "2J");
         System.out.print (ESC + "0;0H");
         System.out.flush();
     }
-    public void inGame(){
+    public int inGame(){
             Combinaison combinaison;
             boolean res;
             System.out.println("Tour " + (numTour +1 ) + " / " + nbrCoups);
@@ -124,7 +124,7 @@ public class Jeu {
             }
             System.out.println("\nPlateau final :\n" + p.toString());
 
-
+            return numTour;
         }
     
 
