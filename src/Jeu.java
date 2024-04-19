@@ -10,7 +10,6 @@ public class Jeu {
     private int nbrPionts=4;
     private boolean memeCouleur=true;
     private int nbrCoups=12;
-    private int numTour=0;
     private final Combinaison codeSecret;
 
 
@@ -67,10 +66,12 @@ public class Jeu {
 
         }
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
-        this.p = new Plateau(nbrPionts, nbrCoups, nbrCouleurs, memeCouleur);
 
         afficheCouleur();
     }
+
+
+  
     private void clearConsole() {
         final String ESC = "\033[";
         System.out.print (ESC + "2J");
@@ -78,54 +79,57 @@ public class Jeu {
         System.out.flush();
     }
     public int inGame(){
-            Combinaison combinaison;
-            boolean res;
-            System.out.println("Tour " + (numTour +1 ) + " / " + nbrCoups);
+        int numTour=0;
+        this.p = new Plateau(nbrPionts, nbrCoups, nbrCouleurs, memeCouleur);
+        Combinaison combinaison;
+        boolean res;
+        
+        System.out.println("Donnez votre combinaison:\n Tour " + (numTour +1 ) + " / " + nbrCoups);
+        combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
+        p.ajouterLigne(numTour, combinaison);
+        numTour++; // Incrémente le numéro du tour
+
+    
+        while (!fin && numTour < nbrCoups) {
+            clearConsole();
+            System.out.println("Resultat du tour précédent :\n");
+            if(difficulty==0){
+                res=combinaison.afficheComparefacile(codeSecret);
+            }
+            else{
+                res=combinaison.afficheCompareDifficile(codeSecret);
+            }
+            if(res==true){
+                fin=true;
+                break;
+            }
+            System.out.println("Plateau actuel :\n" + p.toString());
+            System.out.println("Tour " + (numTour + 1) + " / " + nbrCoups);
+            System.out.println("Donnez votre combinaison :\n");
+            afficheCouleur();
+    
             combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
+    
+    
             p.ajouterLigne(numTour, combinaison);
             numTour++; // Incrémente le numéro du tour
 
-        
-            while (!fin && numTour < nbrCoups) {
-                clearConsole();
-                System.out.println("Resultat du tour précédent :\n");
-                if(difficulty==0){
-                    res=combinaison.afficheComparefacile(codeSecret);
-                }
-                else{
-                    res=combinaison.afficheCompareDifficile(codeSecret);
-                }
-                if(res==true){
-                    fin=true;
-                    break;
-                }
-                System.out.println("Plateau actuel :\n" + p.toString());
-                System.out.println("Tour " + (numTour + 1) + " / " + nbrCoups);
-                System.out.println("Donnez votre combinaison :\n");
-                afficheCouleur();
-        
-                combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
-        
-        
-                p.ajouterLigne(numTour, combinaison);
-                numTour++; // Incrémente le numéro du tour
 
+    
 
-        
-
-            }
-            clearConsole();
-            if(!fin){
-                System.out.println("Vous avez perdu...\n \n La solution étais :  " + codeSecret.toString());
-            }
-            else{
-                System.out.println("Bravo vous avez gagné !" );
-
-            }
-            System.out.println("\nPlateau final :\n" + p.toString());
-
-            return numTour;
         }
+        clearConsole();
+        if(!fin){
+            System.out.println("Vous avez perdu...\n \n La solution étais :  " + codeSecret.toString());
+        }
+        else{
+            System.out.println("Bravo vous avez gagné !" );
+
+        }
+        System.out.println("\nPlateau final :\n" + p.toString());
+
+        return numTour;
+    }
     
 
 

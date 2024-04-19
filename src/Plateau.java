@@ -12,10 +12,7 @@ public class Plateau {
    
 
     public Plateau(int nbrPionts,int nbrCoups,int nbrCouleurs, boolean memeCouleur){
-        ArrayList<Couleur> listeComplete = new ArrayList<>(Arrays.asList(Couleur.values()));
-        Collections.shuffle(listeComplete);
         this.plateau= new Combinaison[nbrCoups];
-        listeCouleurs = new ArrayList<>(listeComplete.subList(0, nbrCouleurs));
 
     }
 

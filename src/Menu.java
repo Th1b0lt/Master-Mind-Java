@@ -4,18 +4,18 @@ public class Menu {
     private boolean jouer=true;
 
     public Menu(){
+        System.out.println("\n \nBIENVENUE DANS LE JEU DU MASTERMIND\n \n");
         while(jouer){
-            System.out.println("\n \nBIENVENUE DANS LE JEU DU MASTERMIND\n \n");
-            if(System.console().readLine("Voulez vous rappelez les règles du jeu ? (o/n)")=="o"){
+            if(System.console().readLine("Voulez vous rappelez les règles du jeu ? (o/n)").equalsIgnoreCase("o")){
                 afficherRegle();
             }
-            if(System.console().readLine("Partie solo ou multijoueur ? (s/m)")=="m"){
+            if(System.console().readLine("Partie solo ou multijoueur ? (s/m)").equalsIgnoreCase("m")){
                 clearConsole();
                 jeuMulti();
             }
             else{
                 clearConsole();
-                if(System.console().readLine("Voulez vous charger une partie existante ? (o/n)")=="o"){
+                if(System.console().readLine("Voulez vous charger une partie existante ? (o/n)").equalsIgnoreCase("o")){
                     //
                     //TODO
                     //
@@ -25,14 +25,14 @@ public class Menu {
                     lancerPartie();
                 }
             }
-            if(System.console().readLine("Voulez vous refaire une partie ? (o/n)")=="n"){
+            if(System.console().readLine("Voulez vous refaire une partie ? (o/n)").equalsIgnoreCase("n")){
                 jouer=false;
                 System.out.println("Fin du jeu, merci pour votre temps !");
             };
         }
 
     }
-    
+
     private void clearConsole() {
         final String ESC = "\033[";
         System.out.print (ESC + "2J");
@@ -48,19 +48,32 @@ public class Menu {
     }
 
     public void jeuMulti(){
-        int partie1,partie2;
+        int nbrPartie,score1=0,score2=0;
+        System.out.println("Mode multijoueur\n \n");
         Jeu j = new Jeu();
-        System.out.println("Mode multijoueur, deux parties seront jouées, le joueur avec le moins de coup gagne la partie. Bonne chance\n");
-        partie1=j.inGame();
-        partie2=j.inGame();
-        if(partie1==partie2){
-            System.out.println("Egalité bravo à vous deux !");
+        nbrPartie=Integer.parseInt(System.console().readLine("Combien de partie pour vous départagez  ?\n"));
+        clearConsole();
+        for(int i=0;i<nbrPartie;i++){
+            if(i>0){
+                System.out.println("Le Joueur 2 a trouvé !\n\n");
+            }
+            System.out.println("TOUR DU JOUEUR 1 \n \n");
+            score1+=j.inGame();
+            clearConsole();
+            System.out.println("Le Joueur 1 a trouvé !\n\nTOUR DU JOUEUR 2 \n \n");
+            score2+=j.inGame();
+            clearConsole();
+
         }
-        else if(partie1>partie2){
-            System.out.println("Le premier joueur à gagné, bravo à lui");
+        clearConsole();
+        if(score1==score2){
+            System.out.println("Egalité bravo à vous deux ! Le score est de "+score1+"-"+score2);
+        }
+        else if(score1<score2){
+            System.out.println("Le premier joueur à gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
         else{
-            System.out.println("Le second joueur à gagné, bravo à lui");
+            System.out.println("Le second joueur à gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
     }
 
