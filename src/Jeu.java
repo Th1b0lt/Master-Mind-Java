@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Jeu {
     private Plateau p;
-    private boolean multi=false;
     private boolean fin=false;
     private int difficulty;
     private int nbrCouleurs=8;
@@ -15,9 +14,9 @@ public class Jeu {
     private final Combinaison codeSecret;
 
 
+
     public Jeu(){
         int choix,difficulty;
-        System.out.println("Bienvenu dans sur jeu du Mastermind !\n Les règles sont simples vous devez la combinaison secrete le plus rapidement possible.\n Tout d'abord définissons la difficulté de la partie:\n");
 
          difficulty=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant):\n" + //
                         " Facile:0 \n" + //
@@ -81,7 +80,6 @@ public class Jeu {
     public void inGame(){
             Combinaison combinaison;
             boolean res;
-            System.out.println(codeSecret.toString());
             System.out.println("Tour " + (numTour +1 ) + " / " + nbrCoups);
             combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
             p.ajouterLigne(numTour, combinaison);
