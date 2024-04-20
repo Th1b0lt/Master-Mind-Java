@@ -40,37 +40,35 @@ public class Jeu {
                 break;
             default:
                 System.out.println("Vous avez choisi de personnaliser la difficulté a votre guise:\n");
-                choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de couleur(6 ou 8) :"));
-                while(choix<6 || choix>8){
-                    choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de couleur(6 ou 8) :"));
-                }
-                this.nbrCouleurs=choix;
-                choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de pions a devinez(4 ou 5) :"));
-                while(choix!=4 && choix!=5){
-                    choix=Integer.parseInt(System.console().readLine("Choisissez le nombre de pions a devinez(4 ou 5) :"));
-                }
-                this.nbrPionts=choix;
-                choix=Integer.parseInt(System.console().readLine("Choisissez votre nombre de coups(10 ou 12) :"));
-                while(choix<10 || choix>12){
-                    choix=Integer.parseInt(System.console().readLine("Choisissez votre nombre de coups(10 ou 12) :"));
-                }
-                this.nbrCoups=choix;
-                choix=Integer.parseInt(System.console().readLine("Choisissez si les points peuvent avoir la meme couleur, 0 pour non 1 pour oui :"));
-                while(choix!=1 && choix!=0){
-                    choix=Integer.parseInt(System.console().readLine("Choisissez si les points peuvent avoir la meme couleur, 0 pour non 1 pour oui :"));
-                }
-                if(choix==0){
-                    this.memeCouleur=false;
-                }
-                break;
-
+                this.nbrCouleurs = obtenirChoix(6, 8, "Choisissez le nombre de couleur(6 ou 8) :");
+                this.nbrPionts = obtenirChoix(4, 5, "Choisissez le nombre de pions à deviner(4 ou 5) :");
+                this.nbrCoups = obtenirChoix(10, 12, "Choisissez votre nombre de coups(10 ou 12) :");
+                int couleurChoix = obtenirChoix(0, 1, "Choisissez si les points peuvent avoir la même couleur, 0 pour non 1 pour oui :");
+                this.memeCouleur = (couleurChoix == 1);
+            break;
         }
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
 
         afficheCouleur();
     }
 
-
+    private int obtenirEntier(String message) {
+        while (true) {
+            try {
+                return Integer.parseInt(System.console().readLine(message));
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez entrer un entier valide.");
+            }
+        }
+    }
+    
+    private int obtenirChoix(int min, int max, String message) {
+        int choix;
+        do {
+            choix = obtenirEntier(message);
+        } while (choix < min || choix > max);
+        return choix;
+    }
   
     private void clearConsole() {
         final String ESC = "\033[";
