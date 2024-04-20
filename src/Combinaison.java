@@ -6,16 +6,8 @@ import java.util.ArrayList;
 public class Combinaison{
     private Pion combinaison [];
     private final int taille;
-<<<<<<< HEAD
-    public Combinaison(Pion combinaison []){
-        this.combinaison=combinaison;
-        this.taille=combinaison.length;
-    }
-    public Combinaison(int taille){
-=======
     
     public Combinaison(int taille,int nbrCouleurs,boolean memeCouleur){
->>>>>>> 1394b60cd9ee8389f488be4157753b32c9547af2
         this.taille=taille;
         int couleurValue;
         combinaison= new Pion [taille];
@@ -24,9 +16,17 @@ public class Combinaison{
             for (int i=0;i<taille;i++){
                 //Input utilisateur pour creer des pions
                 System.out.println("Couleur du pion " + (i + 1) + ": ");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Veuillez entrer un nombre.");
+                    scanner.next(); // Consommez l'entrée incorrecte
+                }
                 couleurValue=scanner.nextInt();
                 while(couleurValue<1 || couleurValue>nbrCouleurs){
                     System.out.println("CHOISSISSEZ UN NUMERO DE COULEUR VALIDE ! \n Compris entre 1 et le maximum disponible");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("Veuillez entrer un nombre valide.");
+                        scanner.next(); // Consommez l'entrée incorrecte
+                    }
                     couleurValue=scanner.nextInt();
                 }
                 combinaison[i] = new Pion(Couleur.getCouleurByValue(couleurValue));
@@ -37,9 +37,17 @@ public class Combinaison{
             boolean bon=false;
             for (int i=0;i<taille;i++){
                 System.out.println("Couleur du pion " + (i + 1) + ": ");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Veuillez entrer un nombre valide.");
+                    scanner.next(); // Consommez l'entrée incorrecte
+                }
                 couleurValue=scanner.nextInt();
                 while(couleurValue<1 || couleurValue>nbrCouleurs){
                     System.out.println("CHOISSISSEZ UN NUMERO DE COULEUR VALIDE ! \n Compris entre 1 et le maximum disponible");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("Veuillez entrer un nombre valide.");
+                        scanner.next(); // Consommez l'entrée incorrecte
+                    }
                     couleurValue=scanner.nextInt();
 
                 }
@@ -56,6 +64,10 @@ public class Combinaison{
                         couleurValue=scanner.nextInt();
                         while(couleurValue<1 || couleurValue>nbrCouleurs){
                             System.out.println("CHOISSISSEZ UN NUMERO DE COULEUR VALIDE ! \n Compris entre 1 et le maximu disponible");
+                            while (!scanner.hasNextInt()) {
+                                System.out.println("Veuillez entrer un nombre valide.");
+                                scanner.next(); // Consommez l'entrée incorrecte
+                            }
                             couleurValue=scanner.nextInt();
                             }
                         newPion = new Pion(Couleur.getCouleurByValue(couleurValue));
