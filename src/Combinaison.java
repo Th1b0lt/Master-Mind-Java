@@ -9,6 +9,7 @@ public class Combinaison{
     private final int taille;
     public Combinaison(Pion combinaison []){
         this.combinaison=combinaison;
+        this.taille=combinaison.length;
     }
     public Combinaison(int taille){
         this.taille=taille;
