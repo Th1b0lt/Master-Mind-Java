@@ -3,35 +3,57 @@ package projet.source.projet;
 public class Menu {
     private boolean jouer=true;
 
-    public Menu(){
+    public Menu() {
         System.out.println("\n \nBIENVENUE DANS LE JEU DU MASTERMIND\n \n");
-        while(jouer){
-            if(System.console().readLine("Voulez vous rappelez les règles du jeu ? (o/n)").equalsIgnoreCase("o")){
+        while (jouer) {
+            String reponse;
+            
+            reponse = System.console().readLine("Voulez-vous rappeler les règles du jeu ? (o/n)");
+            while (!reponse.equalsIgnoreCase("o") && !reponse.equalsIgnoreCase("n")) {
+                System.out.println("Veuillez répondre par 'o' pour oui ou 'n' pour non.");
+                reponse = System.console().readLine("Voulez-vous rappeler les règles du jeu ? (o/n)");
+            }
+            if (reponse.equalsIgnoreCase("o")) {
                 afficherRegle();
             }
-            if(System.console().readLine("Partie solo ou multijoueur ? (s/m)").equalsIgnoreCase("m")){
+    
+            reponse = System.console().readLine("Partie solo ou multijoueur ? (s/m)");
+            while (!reponse.equalsIgnoreCase("s") && !reponse.equalsIgnoreCase("m")) {
+                System.out.println("Veuillez répondre par 's' pour solo ou 'm' pour multijoueur.");
+                reponse = System.console().readLine("Partie solo ou multijoueur ? (s/m)");
+            }
+            if (reponse.equalsIgnoreCase("m")) {
                 clearConsole();
                 jeuMulti();
-            }
-            else{
+            } else {
                 clearConsole();
-                if(System.console().readLine("Voulez vous charger une partie existante ? (o/n)").equalsIgnoreCase("o")){
+                reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
+                while (!reponse.equalsIgnoreCase("o") && !reponse.equalsIgnoreCase("n")) {
+                    System.out.println("Veuillez répondre par 'o' pour oui ou 'n' pour non.");
+                    reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
+                }
+                if (reponse.equalsIgnoreCase("o")) {
                     //
                     //TODO
                     //
-                }
-                else{
+                } else {
                     System.out.println("Nouvelle partie :\n");
                     lancerPartie();
                 }
             }
-            if(System.console().readLine("Voulez vous refaire une partie ? (o/n)").equalsIgnoreCase("n")){
-                jouer=false;
+    
+            reponse = System.console().readLine("Voulez-vous refaire une partie ? (o/n)");
+            while (!reponse.equalsIgnoreCase("o") && !reponse.equalsIgnoreCase("n")) {
+                System.out.println("Veuillez répondre par 'o' pour oui ou 'n' pour non.");
+                reponse = System.console().readLine("Voulez-vous refaire une partie ? (o/n)");
+            }
+            if (reponse.equalsIgnoreCase("n")) {
+                jouer = false;
                 System.out.println("Fin du jeu, merci pour votre temps !");
-            };
+            }
         }
-
     }
+    
 
     private void clearConsole() {
         final String ESC = "\033[";
@@ -48,10 +70,18 @@ public class Menu {
     }
 
     public void jeuMulti(){
-        int nbrPartie,score1=0,score2=0;
+        int nbrPartie=0,score1=0,score2=0;
         System.out.println("Mode multijoueur\n \n");
         Jeu j = new Jeu();
-        nbrPartie=Integer.parseInt(System.console().readLine("Combien de partie pour vous départagez  ?\n"));
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                nbrPartie = Integer.parseInt(System.console().readLine("Combien de partie pour vous départager ?\n"));
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez entrer un nombre valide.");
+            }
+        }
         clearConsole();
         for(int i=0;i<nbrPartie;i++){
             if(i>0){
