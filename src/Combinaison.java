@@ -174,8 +174,9 @@ public class Combinaison{
         String retour="";
         
         for (int i=0;i<taille;i++){
-            retour+="| " + combinaison[i].colorie()+"\u2B24 \u001B[37m|";
+            retour+="| " + combinaison[i].colorie()+"\u2B24 \u001B[37m|" ;
         }
+        retour+="Nombre de pions bien placés: "  +"Nombre de bonnes couleurs mal placées: " ;
         return retour;
     }
 

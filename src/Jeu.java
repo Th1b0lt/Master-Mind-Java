@@ -48,6 +48,8 @@ public class Jeu {
             break;
         }
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
+        //Decomenter pour tester
+        System.out.println(" la combinaison est : "+ codeSecret.toString());
 
         afficheCouleur();
     }
