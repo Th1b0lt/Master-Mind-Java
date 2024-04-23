@@ -169,6 +169,11 @@ public class Combinaison{
         return false;
     }
 
+    public String getCompareDifficile(Combinaison otherCombinaison){
+        Object comparaison[]=compare(otherCombinaison);
+        return " Nombre de pion(s) bien placé(s) : " + comparaison[2] + " Nombre de bonnes couleurs mal placées : " + comparaison[3];
+    }
+
     @Override
     public String toString(){
         String retour="";
@@ -176,7 +181,6 @@ public class Combinaison{
         for (int i=0;i<taille;i++){
             retour+="| " + combinaison[i].colorie()+"\u2B24 \u001B[37m|" ;
         }
-        retour+="Nombre de pions bien placés: "  +"Nombre de bonnes couleurs mal placées: " ;
         return retour;
     }
 

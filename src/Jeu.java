@@ -10,7 +10,7 @@ public class Jeu {
     private int nbrPionts=4;
     private boolean memeCouleur=true;
     private int nbrCoups=12;
-    private final Combinaison codeSecret;
+    
 
 
 
@@ -47,10 +47,7 @@ public class Jeu {
                 this.memeCouleur = (couleurChoix == 1);
             break;
         }
-        this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
-        //Decomenter pour tester
-        System.out.println(" la combinaison est : "+ codeSecret.toString());
-
+     
         afficheCouleur();
     }
 
@@ -94,10 +91,10 @@ public class Jeu {
             clearConsole();
             System.out.println("Resultat du tour précédent :\n");
             if(difficulty==0){
-                res=combinaison.afficheComparefacile(codeSecret);
+                res=combinaison.afficheComparefacile(p.getCodeSecret());
             }
             else{
-                res=combinaison.afficheCompareDifficile(codeSecret);
+                res=combinaison.afficheCompareDifficile(p.getCodeSecret());
             }
             if(res==true){
                 fin=true;
@@ -120,7 +117,7 @@ public class Jeu {
         }
         clearConsole();
         if(!fin){
-            System.out.println("Vous avez perdu...\n \n La solution étais :  " + codeSecret.toString());
+            System.out.println("Vous avez perdu...\n \n La solution étais :  " + p.getCodeSecret().toString());
         }
         else{
             System.out.println("Bravo vous avez gagné !" );
