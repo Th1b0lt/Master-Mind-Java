@@ -19,6 +19,7 @@ public class Plateau {
     private int nbrPionts=4;
     private boolean memeCouleur=true;
     private int nbrCoups=12;
+    private int numTour=0;
    
 
     public Plateau(){
@@ -57,10 +58,8 @@ public class Plateau {
             break;
         }
         this.plateau= new Combinaison[nbrCoups];
+
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
-        //Decomenter pour tester
-        System.out.println(" la combinaison est : "+ codeSecret.toString());
-     
         afficheCouleur();
     }
 
@@ -92,17 +91,19 @@ public class Plateau {
     }
 
     public int inGame(){
-        int numTour=0;
         Combinaison combinaison;
         boolean res;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Donnez votre combinaison:\n Tour " + (numTour +1 ) + " / " + nbrCoups);
+        this.fin=false;
+        //Decomenter pour tester
+        System.out.println(" la combinaison est : "+ codeSecret.toString());
+        System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
-        ajouterLigne(numTour, combinaison);
-        numTour++; // Incrémente le numéro du tour
+        ajouterLigne(this.numTour, combinaison);
+        this.numTour++; // Incrémente le numéro du tour
 
     
-        while (!fin && numTour < nbrCoups) {
+        while (!fin && this.numTour < nbrCoups) {
             clearConsole();
             System.out.println("Resultat du tour précédent :\n");
             if(difficulty==0){
@@ -116,7 +117,7 @@ public class Plateau {
                 break;
             }
             System.out.println("Plateau actuel :\n" + toString());
-            System.out.println("Tour " + (numTour + 1) + " / " + nbrCoups);
+            System.out.println("Tour " + (this.numTour + 1) + " / " + nbrCoups);
             System.out.println("Appuyez sur 's' pour sauvegarder et quitter, ou appuyez sur Entrée pour continuer :");
             
             String choix = scanner.nextLine();
@@ -143,8 +144,8 @@ public class Plateau {
             combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
             
             
-            ajouterLigne(numTour, combinaison);
-            numTour++; // Incrémente le numéro du tour
+            ajouterLigne(this.numTour, combinaison);
+            this.numTour++; // Incrémente le numéro du tour
 
 
     
@@ -160,8 +161,10 @@ public class Plateau {
             System.out.println("Bravo vous avez gagné !" );
 
         }
-        
-
+        for (int i = 0; i < plateau.length && plateau[i] != null; i++) {
+            plateau[i]=null;
+        }
+        this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
         return numTour;
     }
     
@@ -207,6 +210,7 @@ public class Plateau {
             lines.add("nbrPionts=" + nbrPionts);
             lines.add("memeCouleur=" + memeCouleur);
             lines.add("nbrCoups=" + nbrCoups);
+            lines.add("numTour="+ numTour);
             
             // Sauvegarde du code secret et des combinaisons du plateau
             String codeSecretStr="";
@@ -232,6 +236,7 @@ public class Plateau {
     }
 
     public void load(Path path) {
+    int index=0;
     try {
         ArrayList<String> lines = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         
@@ -259,12 +264,15 @@ public class Plateau {
                     this.nbrCoups = Integer.parseInt(parts[1]);
                     System.out.println("nbrCoups " + this.nbrCoups);
                     break;
+                case "numTour":
+                    this.numTour=Integer.parseInt(parts[1]);
+                    System.out.println("numTour " + this.numTour);
                 case "CodeSecret":
                     this.codeSecret = new Combinaison(parts[1]);
                     System.out.println(this.codeSecret.toString());
                     break;
                 case "Combinaison":
-                    int index = Integer.parseInt(parts[2]);
+                     index = Integer.parseInt(parts[2]);
                     if (plateau[index] == null) {
                         plateau[index] = new Combinaison(parts[1]);
                         System.out.println(this.plateau[index].toString());
@@ -278,6 +286,11 @@ public class Plateau {
         System.out.println("Cest la que ca chie");
 
     }
+    System.out.println("La partie a été chargée. Continuons la partie avec " +(nbrCoups-index-1)+ " coups restants.");
+    }
+
+    public void setNumTour(int num){
+        this.numTour=num;
     }
 
     @Override

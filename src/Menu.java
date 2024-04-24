@@ -56,7 +56,6 @@ public class Menu {
     
                     clearConsole();
                     int nbrCoupsJouer = chargerPartie(path);
-                    System.out.println("La partie a été chargée. Continuons la partie avec " + nbrCoupsJouer + " coups restants.");
                 } else {
                     System.out.println("Nouvelle partie :\n");
                     lancerPartie();
@@ -117,9 +116,11 @@ public class Menu {
             }
             System.out.println("TOUR DU JOUEUR 1 \n \n");
             score1+=j.inGame();
+            j.setNumTour(0);
             clearConsole();
             System.out.println("Le Joueur 1 a trouvé !\n\nTOUR DU JOUEUR 2 \n \n");
             score2+=j.inGame();
+            j.setNumTour(0);
             clearConsole();
 
         }
