@@ -1,5 +1,12 @@
 package projet.source.projet;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.nio.file.*;
+import java.nio.charset.*;
+import java.io.*;
 public class Menu {
     private boolean jouer=true;
 
@@ -33,9 +40,23 @@ public class Menu {
                     reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
                 }
                 if (reponse.equalsIgnoreCase("o")) {
-                    //
-                    //TODO
-                    //
+                    boolean fichierValide = false;
+                    Path path = null;
+    
+                    while (!fichierValide) {
+                        String chemin = System.console().readLine("Veuillez entrer le chemin du fichier de sauvegarde : ");
+                        path = Paths.get(chemin);
+        
+                        if (Files.exists(path) && !Files.isDirectory(path)) {
+                            fichierValide = true;
+                        } else {
+                             System.out.println("Le fichier n'existe pas ou est incorrect. Veuillez réessayer.");
+                        }
+                    }
+    
+                    clearConsole();
+                    int nbrCoupsJouer = chargerPartie(path);
+                    System.out.println("La partie a été chargée. Continuons la partie avec " + nbrCoupsJouer + " coups restants.");
                 } else {
                     System.out.println("Nouvelle partie :\n");
                     lancerPartie();
@@ -61,10 +82,17 @@ public class Menu {
         System.out.print (ESC + "0;0H");
         System.out.flush();
     }
+    public int chargerPartie(Path path){
+        Plateau jeu=new Plateau(1);
+        System.out.println("Test1");
+        jeu.load(path);
+        System.out.println("test2");
+        return jeu.inGame();
+    }
 
     public int lancerPartie(){
         int nbrCoupsJouer;
-        Jeu j= new Jeu();
+        Plateau j= new Plateau();
         nbrCoupsJouer=j.inGame();
         return nbrCoupsJouer;
     }
@@ -72,7 +100,7 @@ public class Menu {
     public void jeuMulti(){
         int nbrPartie=0,score1=0,score2=0;
         System.out.println("Mode multijoueur\n \n");
-        Jeu j = new Jeu();
+        Plateau j = new Plateau();
         boolean validInput = false;
         while (!validInput) {
             try {

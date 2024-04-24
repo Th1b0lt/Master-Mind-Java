@@ -114,6 +114,14 @@ public class Combinaison{
             }
         }
     }
+    public Combinaison(String strCombinaison) {
+        this.taille = strCombinaison.length();
+        this.combinaison = new Pion[taille];
+        for (int i = 0; i < taille; i++) {
+            int value = Integer.parseInt(Character.toString(strCombinaison.charAt(i)));
+            this.combinaison[i] = new Pion(Couleur.getCouleurByValue(value));
+        }
+    }
 
     private Object[] compare(Combinaison otherCombinaison){
         int wellPlaced=0;
@@ -173,7 +181,9 @@ public class Combinaison{
         Object comparaison[]=compare(otherCombinaison);
         return " Nombre de pion(s) bien placé(s) : " + comparaison[2] + " Nombre de bonnes couleurs mal placées : " + comparaison[3];
     }
-
+    public Pion[] getCombinaison(){
+        return combinaison;
+    }
     @Override
     public String toString(){
         String retour="";

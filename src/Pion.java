@@ -14,6 +14,7 @@ public class Pion{
     public String colorie(){
         return this.c.getCodeCouleur();
     }
+    
 
 
     @Override
