@@ -135,7 +135,7 @@ public class Plateau {
             }
 
             save(path);
-            break;
+            return 0;
             }
             System.out.println("Donnez votre combinaison :\n");
             afficheCouleur();
