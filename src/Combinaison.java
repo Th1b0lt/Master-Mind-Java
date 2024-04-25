@@ -129,32 +129,31 @@ public class Combinaison{
     private Object[] compare(Combinaison otherCombinaison){
         int nbrBienPlace = 0;
         int nbrBonneCouleur = 0;
-        ArrayList<Integer> dejaVu = new ArrayList<>();
+        int[] dejaVu = new int[taille];
+        
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
         ArrayList<Pion> bonneCouleur = new ArrayList<>();
     
         // Trouver les pions bien placés
         for (int i = 0; i < this.taille; i++){
-            if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i]) == 1){
+            if (this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[i].getCouleur() )){
                 nbrBienPlace++;
                 pionsBienPlacees.add(this.combinaison[i]);
-                dejaVu.add(i);
+                dejaVu[i]=1;
             }
         }
     
         // Trouver les pions de la bonne couleur mais mal placés
         for (int i = 0; i < this.taille; i++){
-            if (!dejaVu.contains(i)){
-                for (int j = 0; j < this.taille; j++){
-                    if (i != j && !dejaVu.contains(j) && 
-                        this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur())){
-                        nbrBonneCouleur++;
-                        bonneCouleur.add(this.combinaison[i]);
-                        dejaVu.add(j);
-                        break;
-                    }
+            for (int j = 0; j < this.taille; j++){
+                if (this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur()) && !(dejaVu[i]==1)){
+                    nbrBonneCouleur++;
+                    bonneCouleur.add(this.combinaison[i]);
+                    dejaVu[i]=1;
+                    break;
                 }
             }
+            
         }
     
         Object[] result = new Object[4];

@@ -1,7 +1,7 @@
 difficulty=0
 nbrCouleurs=6
 nbrPionts=4
-memeCouleur=false
+memeCouleur=true
 nbrCoups=12
-CodeSecret=4631
+CodeSecret=4646
 Combinaison=1234=0
