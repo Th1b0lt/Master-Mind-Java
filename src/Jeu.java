@@ -48,7 +48,6 @@ public class Jeu {
             break;
         }
      
-        afficheCouleur();
     }
 
     private int obtenirEntier(String message) {
@@ -81,7 +80,8 @@ public class Jeu {
         Combinaison combinaison;
         boolean res;
         
-        System.out.println("Donnez votre combinaison:\n Tour " + (numTour +1 ) + " / " + nbrCoups);
+        System.out.println("Donnez votre combinaison:\n Tour " + (numTour +1 ) + " / " + nbrCoups + "\n");
+        afficheCouleur();
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         p.ajouterLigne(numTour, combinaison);
         numTour++; // Incrémente le numéro du tour
@@ -116,14 +116,15 @@ public class Jeu {
 
         }
         clearConsole();
+        System.out.println("\nPlateau final :\n" + p.toString());
         if(!fin){
             System.out.println("Vous avez perdu...\n \n La solution étais :  " + p.getCodeSecret().toString());
+            numTour+=5;
         }
         else{
-            System.out.println("Bravo vous avez gagné !" );
+            System.out.println("Bravo vous avez gagné !  La solution étais :  " + p.getCodeSecret().toString()); 
 
         }
-        System.out.println("\nPlateau final :\n" + p.toString());
 
         return numTour;
     }

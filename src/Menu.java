@@ -1,5 +1,7 @@
 package projet.source.projet;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 public class Menu {
     private boolean jouer=true;
 
@@ -72,7 +74,6 @@ public class Menu {
     public void jeuMulti(){
         int nbrPartie=0,score1=0,score2=0;
         System.out.println("Mode multijoueur\n \n");
-        Jeu j = new Jeu();
         boolean validInput = false;
         while (!validInput) {
             try {
@@ -83,30 +84,38 @@ public class Menu {
             }
         }
         clearConsole();
+        Jeu j = new Jeu();
+        clearConsole();
         for(int i=0;i<nbrPartie;i++){
             if(i>0){
-                System.out.println("Le Joueur 2 a trouvé !\n\n");
+                System.out.println("Le Joueur 2 a fini son tour !\n\n");
             }
             System.out.println("TOUR DU JOUEUR 1 \n \n");
             score1+=j.inGame();
-            clearConsole();
-            System.out.println("Le Joueur 1 a trouvé !\n\nTOUR DU JOUEUR 2 \n \n");
+            System.out.println("Le Joueur 1 a fini son tour !\n\nTOUR DU JOUEUR 2 \n \n");
             score2+=j.inGame();
+            wait(50);
             clearConsole();
-
         }
         clearConsole();
         if(score1==score2){
             System.out.println("Egalité bravo à vous deux ! Le score est de "+score1+"-"+score2);
         }
         else if(score1<score2){
-            System.out.println("Le premier joueur à gagné, bravo à lui Le score est de "+score1+"-"+score2);
+            System.out.println("Le premier joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
         else{
-            System.out.println("Le second joueur à gagné, bravo à lui Le score est de "+score1+"-"+score2);
+            System.out.println("Le second joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
     }
-
+    public static void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        }
+        catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
     public void afficherRegle(){
         System.out.println("Résumé des règles du Mastermind :\n" + //
         

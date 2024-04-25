@@ -152,6 +152,7 @@ public class Combinaison{
         Object comparaison[]=compare(otherCombinaison);
         System.out.println("Nombre de pions bien placés: " + comparaison[2]);
         System.out.println("Nombre de bonnes couleurs mal placées: " + comparaison[3]);
+        System.out.println(taille);
         if((int)comparaison[2]==taille){
             return true;
         }
