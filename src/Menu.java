@@ -91,7 +91,7 @@ public class Menu {
 
     public int lancerPartie(){
         int nbrCoupsJouer;
-        Plateau j= new Plateau();
+        Plateau j= new Plateau(false);
         nbrCoupsJouer=j.inGame();
         return nbrCoupsJouer;
     }
@@ -99,7 +99,7 @@ public class Menu {
     public void jeuMulti(){
         int nbrPartie=0,score1=0,score2=0;
         System.out.println("Mode multijoueur\n \n");
-        Plateau j = new Plateau();
+        Plateau j = new Plateau(true);
         boolean validInput = false;
         while (!validInput) {
             try {

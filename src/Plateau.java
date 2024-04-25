@@ -20,14 +20,14 @@ public class Plateau {
     private boolean memeCouleur=true;
     private int nbrCoups=12;
     private int numTour=0;
+    private boolean multi;
    
 
-    public Plateau(){
-        
-
+    public Plateau(boolean multi){
         int choix,difficulty;
 
-         difficulty=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant):\n" + //
+        this.multi=multi;
+        difficulty=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant):\n" + //
                         " Facile:0 \n" + //
                         " Normal:1 \n" + //
                         " Difficile:2\n" + //
@@ -96,7 +96,7 @@ public class Plateau {
         Scanner scanner = new Scanner(System.in);
         this.fin=false;
         //Decomenter pour tester
-        System.out.println(" la combinaison est : "+ codeSecret.toString());
+        // System.out.println(" la combinaison est : "+ codeSecret.toString());
         System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         ajouterLigne(this.numTour, combinaison);
@@ -118,25 +118,27 @@ public class Plateau {
             }
             System.out.println("Plateau actuel :\n" + toString());
             System.out.println("Tour " + (this.numTour + 1) + " / " + nbrCoups);
-            System.out.println("Appuyez sur 's' pour sauvegarder et quitter, ou appuyez sur Entrée pour continuer :");
-            
-            String choix = scanner.nextLine();
-    
-            if ("s".equalsIgnoreCase(choix)) {
-                System.out.println("Entrez le chemin du fichier de sauvegarde :");
-                String chemin = scanner.nextLine();
+            if(!multi){
+                System.out.println("Appuyez sur 's' pour sauvegarder et quitter, ou appuyez sur Entrée pour continuer :");
+                
+                String choix = scanner.nextLine();
+        
+                if ("s".equalsIgnoreCase(choix)) {
+                    System.out.println("Entrez le chemin du fichier de sauvegarde :");
+                    String chemin = scanner.nextLine();
 
-                Path path = Paths.get(chemin);
-                if (Files.exists(path)) {
-                    System.out.println("Le fichier existe déjà. Voulez-vous le remplacer ? (Oui/Non)");
-                    String reponse = scanner.nextLine();
-                    if ("Non".equalsIgnoreCase(reponse)) {
-                        continue;
+                    Path path = Paths.get(chemin);
+                    if (Files.exists(path)) {
+                        System.out.println("Le fichier existe déjà. Voulez-vous le remplacer ? (Oui/Non)");
+                        String reponse = scanner.nextLine();
+                        if ("Non".equalsIgnoreCase(reponse)) {
+                            continue;
+                    }
                 }
-            }
 
-            save(path);
-            return 0;
+                save(path);
+                return 0;
+                }
             }
             System.out.println("Donnez votre combinaison :\n");
             afficheCouleur();
@@ -166,7 +168,6 @@ public class Plateau {
         }
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
         return this.numTour;
-        this.numTour=0;
     }
     
 
