@@ -114,45 +114,60 @@ public class Combinaison{
             }
         }
     }
-
+    public Combinaison(String strCombinaison) {
+        this.taille = strCombinaison.length();
+        this.combinaison = new Pion[taille];
+        for (int i = 0; i < taille; i++) {
+            int value = Integer.parseInt(Character.toString(strCombinaison.charAt(i)));
+            this.combinaison[i] = new Pion(Couleur.getCouleurByValue(value));
+        }
+    }
     private Object[] compare(Combinaison otherCombinaison){
-        int wellPlaced=0;
-        int goodColor=0;
-        boolean alreadySeen[] = new boolean[this.taille];
+        int nbrBienPlace = 0;
+        int nbrBonneCouleur = 0;
+        ArrayList<Integer> dejaVu = new ArrayList<>();
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
-        ArrayList<Pion> bonneCouleur= new ArrayList<>();
-        for (int i=0;i<this.taille;i++){
-            if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i])==1){
-                wellPlaced++;
-                alreadySeen[i]=true;
+        ArrayList<Pion> bonneCouleur = new ArrayList<>();
+    
+        // Trouver les pions bien placés
+        for (int i = 0; i < this.taille; i++){
+            if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i]) == 1){
+                nbrBienPlace++;
                 pionsBienPlacees.add(this.combinaison[i]);
+                dejaVu.add(i);
             }
-            else {
-                for (int j=0;j<this.taille;j++){
-                    if (!alreadySeen[j] && this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur())){
-                        goodColor++;
-                        alreadySeen[j]=true;
+        }
+    
+        // Trouver les pions de la bonne couleur mais mal placés
+        for (int i = 0; i < this.taille; i++){
+            if (!dejaVu.contains(i)){
+                for (int j = 0; j < this.taille; j++){
+                    if (i != j && !dejaVu.contains(j) && 
+                        this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur())){
+                        nbrBonneCouleur++;
                         bonneCouleur.add(this.combinaison[i]);
+                        dejaVu.add(j);
                         break;
                     }
                 }
             }
         }
+    
         Object[] result = new Object[4];
         result[0] = pionsBienPlacees;
         result[1] = bonneCouleur;
-        result[2] = wellPlaced;
-        result[3] = goodColor;
-        
+        result[2] = nbrBienPlace;
+        result[3] = nbrBonneCouleur;
+    
         return result;
-        
     }
+   
+    
 
     public boolean afficheCompareDifficile(Combinaison otherCombinaison){
         Object comparaison[]=compare(otherCombinaison);
         System.out.println("Nombre de pions bien placés: " + comparaison[2]);
         System.out.println("Nombre de bonnes couleurs mal placées: " + comparaison[3]);
-        System.out.println(taille);
         if((int)comparaison[2]==taille){
             return true;
         }
@@ -174,7 +189,9 @@ public class Combinaison{
         Object comparaison[]=compare(otherCombinaison);
         return " Nombre de pion(s) bien placé(s) : " + comparaison[2] + " Nombre de bonnes couleurs mal placées : " + comparaison[3];
     }
-
+    public Pion[] getCombinaison(){
+        return combinaison;
+    }
     @Override
     public String toString(){
         String retour="";

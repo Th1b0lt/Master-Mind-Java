@@ -1,7 +1,12 @@
 package projet.source.projet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.nio.file.*;
+import java.nio.charset.*;
+import java.io.*;
 public class Menu {
     private boolean jouer=true;
 
@@ -35,9 +40,22 @@ public class Menu {
                     reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
                 }
                 if (reponse.equalsIgnoreCase("o")) {
-                    //
-                    //TODO
-                    //
+                    boolean fichierValide = false;
+                    Path path = null;
+    
+                    while (!fichierValide) {
+                        String chemin = System.console().readLine("Veuillez entrer le chemin du fichier de sauvegarde : ");
+                        path = Paths.get(chemin);
+        
+                        if (Files.exists(path) && !Files.isDirectory(path)) {
+                            fichierValide = true;
+                        } else {
+                             System.out.println("Le fichier n'existe pas ou est incorrect. Veuillez réessayer.");
+                        }
+                    }
+    
+                    clearConsole();
+                    int nbrCoupsJouer = chargerPartie(path);
                 } else {
                     System.out.println("Nouvelle partie :\n");
                     lancerPartie();
@@ -63,10 +81,17 @@ public class Menu {
         System.out.print (ESC + "0;0H");
         System.out.flush();
     }
+    public int chargerPartie(Path path){
+        Plateau jeu=new Plateau(1);
+        System.out.println("Test1");
+        jeu.load(path);
+        System.out.println("test2");
+        return jeu.inGame();
+    }
 
     public int lancerPartie(){
         int nbrCoupsJouer;
-        Jeu j= new Jeu();
+        Plateau j= new Plateau();
         nbrCoupsJouer=j.inGame();
         return nbrCoupsJouer;
     }
@@ -74,6 +99,7 @@ public class Menu {
     public void jeuMulti(){
         int nbrPartie=0,score1=0,score2=0;
         System.out.println("Mode multijoueur\n \n");
+        Plateau j = new Plateau();
         boolean validInput = false;
         while (!validInput) {
             try {
@@ -84,17 +110,17 @@ public class Menu {
             }
         }
         clearConsole();
-        Jeu j = new Jeu();
-        clearConsole();
         for(int i=0;i<nbrPartie;i++){
             if(i>0){
                 System.out.println("Le Joueur 2 a fini son tour !\n\n");
             }
             System.out.println("TOUR DU JOUEUR 1 \n \n");
             score1+=j.inGame();
-            System.out.println("Le Joueur 1 a fini son tour !\n\nTOUR DU JOUEUR 2 \n \n");
+            j.setNumTour(0);
+            clearConsole();
+            System.out.println("Le Joueur 1 a trouvé !\n\nTOUR DU JOUEUR 2 \n \n");
             score2+=j.inGame();
-            wait(50);
+            j.setNumTour(0);
             clearConsole();
         }
         clearConsole();
