@@ -146,7 +146,7 @@ public class Combinaison{
         // Trouver les pions de la bonne couleur mais mal placés
         for (int i = 0; i < this.taille; i++){
             for (int j = 0; j < this.taille; j++){
-                if (this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur()) && !(dejaVu[i]==1)){
+                if (i!=j &&this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur()) && !(dejaVu[i]==1)&& !(dejaVu[j]==1)){
                     nbrBonneCouleur++;
                     bonneCouleur.add(this.combinaison[i]);
                     dejaVu[i]=1;
