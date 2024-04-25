@@ -122,6 +122,10 @@ public class Combinaison{
             this.combinaison[i] = new Pion(Couleur.getCouleurByValue(value));
         }
     }
+    public Combinaison(Pion[] combinaison,int taille ){
+        this.taille=taille;
+        this.combinaison=combinaison;
+    }
     private Object[] compare(Combinaison otherCombinaison){
         int nbrBienPlace = 0;
         int nbrBonneCouleur = 0;
