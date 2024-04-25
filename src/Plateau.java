@@ -96,7 +96,7 @@ public class Plateau {
         Scanner scanner = new Scanner(System.in);
         this.fin=false;
         //Decomenter pour tester
-        // System.out.println(" la combinaison est : "+ codeSecret.toString());
+         System.out.println(" la combinaison est : "+ codeSecret.toString());
         System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         ajouterLigne(this.numTour, combinaison);
@@ -160,7 +160,7 @@ public class Plateau {
             System.out.println("Vous avez perdu...\n \n La solution étais :  " + getCodeSecret().toString());
         }
         else{
-            System.out.println("Bravo vous avez gagné !" );
+            System.out.println("Bravo vous avez gagné ! La solution étais :  " + getCodeSecret().toString());
 
         }
         for (int i = 0; i < plateau.length && plateau[i] != null; i++) {
