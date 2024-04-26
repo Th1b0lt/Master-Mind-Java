@@ -109,10 +109,9 @@ public class Menu {
                 System.out.println("Veuillez entrer un nombre valide.");
             }
         }
-        while (!validInput2) {
+        while ( nbrJoueur<1) {
             try {
-                nbrJoueur = Integer.parseInt(System.console().readLine("Combien de Joueur veulent jouer ?\n"));
-                validInput2 = true;
+                nbrJoueur = Integer.parseInt(System.console().readLine("Combien de Joueur veulent jouer (nombre supérieur à 1) ?\n"));
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrer un nombre valide.");
             }
@@ -137,7 +136,7 @@ public class Menu {
                     }
                 }
                 
-                System.out.println("TOUR DE"+noms[k]+" \n \n");
+                System.out.println("TOUR DE "+noms[k].toUpperCase()+" \n \n");
                 j.afficheCouleur();
                 scores[k]+=j.inGame();
                 j.setNumTour(0);
