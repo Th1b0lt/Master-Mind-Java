@@ -151,7 +151,7 @@ public class Menu {
             int maxIndex = 0;
             int maxScore = Integer.MIN_VALUE;
     
-            // Find player with max score
+         
             for (int z = 0; z < nbrJoueur; z++) {
                 if (scores[z] > maxScore) {
                     maxScore = scores[z];
@@ -159,7 +159,7 @@ public class Menu {
                 }
             }
     
-            // Print player with max score and remove from array
+           
             System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
             scores[maxIndex] = Integer.MIN_VALUE; // Set to min value to avoid reselection
         }
