@@ -169,7 +169,7 @@ public class Plateau {
             plateau[i]=null;//Retour du plateau à null
         }
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);//creation d'une nouveau code secret pour la prochaine partie (pour le multi)
-        return this.numTour;
+        return this.nbrCoups-this.numTour;
     }
     
 

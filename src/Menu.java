@@ -95,44 +95,87 @@ public class Menu {
     }
 
     public void jeuMulti(){
-        int nbrPartie=0,score1=0,score2=0;
+        int nbrPartie=0,nbrJoueur=0;
         System.out.println("Mode multijoueur\n \n");
         Plateau j = new Plateau(true);
-        boolean validInput = false;
-        while (!validInput) {
+        boolean validInput1 = false;
+        boolean validInput2 = false;
+        
+        while (!validInput1) {
             try {
                 nbrPartie = Integer.parseInt(System.console().readLine("Combien de partie pour vous départager ?\n"));
-                validInput = true;
+                validInput1 = true;
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrer un nombre valide.");
             }
         }
+        while (!validInput2) {
+            try {
+                nbrJoueur = Integer.parseInt(System.console().readLine("Combien de Joueur veulent jouer ?\n"));
+                validInput2 = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez entrer un nombre valide.");
+            }
+        }
+        int[] scores= new int[nbrJoueur];
+        String[] noms = new String[nbrJoueur]; // Pour stocker les noms des joueurs
         clearConsole();
         for(int i=0;i<nbrPartie;i++){
-            if(i>0){
-                System.out.println("Le Joueur 2 a fini son tour !\n\n");
+            for (int k=0;k<nbrJoueur;k++){
+                if(i>0){
+                    System.out.println(noms[k]+" a fini son tour !\n\n");
+                }
+                if (i==0){
+                    validInput2=false;
+                    while (!validInput2) {
+                        try {
+                            noms[k] = (System.console().readLine("Pseudo du joueur "+(k+1)+"?\n"));
+                            validInput2 = true;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Veuillez entrer une chaine de caractère.");
+                        }
+                    }
+                }
+                
+                System.out.println("TOUR DE"+noms[k]+" \n \n");
+                j.afficheCouleur();
+                scores[k]+=j.inGame();
+                j.setNumTour(0);
+                clearConsole();
+                System.out.println("Le Joueur "+noms[k]+" a trouvé !\n\n");
             }
-            System.out.println("TOUR DU JOUEUR 1 \n \n");
-            j.afficheCouleur();
-            score1+=j.inGame();
-            j.setNumTour(0);
-            clearConsole();
-            System.out.println("Le Joueur 1 a trouvé !\n\nTOUR DU JOUEUR 2 \n \n");
-            j.afficheCouleur();
-            score2+=j.inGame();
-            j.setNumTour(0);
-            clearConsole();
         }
         clearConsole();
+        System.out.println("Classement des joueurs :");
+        for (int i = 0; i < nbrJoueur; i++) {
+            int maxIndex = 0;
+            int maxScore = Integer.MIN_VALUE;
+    
+            // Find player with max score
+            for (int z = 0; z < nbrJoueur; z++) {
+                if (scores[z] > maxScore) {
+                    maxScore = scores[z];
+                    maxIndex = z;
+                }
+            }
+    
+            // Print player with max score and remove from array
+            System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
+            scores[maxIndex] = Integer.MIN_VALUE; // Set to min value to avoid reselection
+        }
+        
+        
+        /* 
         if(score1==score2){
             System.out.println("Egalité bravo à vous deux ! Le score est de "+score1+"-"+score2);
         }
-        else if(score1<score2){
+        else if(score1>score2){
             System.out.println("Le premier joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
         else{
             System.out.println("Le second joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
+        */
     }
     public static void wait(int ms) {
         try {
