@@ -96,7 +96,7 @@ public class Plateau {
         Scanner scanner = new Scanner(System.in);
         this.fin=false;
         //Decomenter pour tester
-         System.out.println(" la combinaison est : "+ codeSecret.toString());
+        //System.out.println(" la combinaison est : "+ codeSecret.toString());
         System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         ajouterLigne(this.numTour, combinaison);
