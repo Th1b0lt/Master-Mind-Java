@@ -135,10 +135,13 @@ public class Combinaison{
     private Object[] compare(Combinaison otherCombinaison){
         int nbrBienPlace = 0;
         int nbrBonneCouleur = 0;
+        ArrayList<Pion> comparateur = new ArrayList<>();
+
         //On crée un tableau pour stocker la position des pions déja traiter(pour eviter de les compter deux fois)
         ArrayList<Pion> pasVu = new ArrayList<>();
         for (int i = 0; i < this.taille; i++){
             pasVu.add(this.combinaison[i]);
+            comparateur.add(otherCombinaison.combinaison[i]);
         }
         
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
@@ -150,6 +153,7 @@ public class Combinaison{
             if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i])==1){
                 nbrBienPlace++;
                 pionsBienPlacees.add(this.combinaison[i]);
+                comparateur.remove(otherCombinaison.combinaison[i]);
                 pasVu.remove(this.combinaison[i]);
             }
         }
@@ -158,9 +162,10 @@ public class Combinaison{
         for (int i = 0; i < this.taille; i++){
             //System.out.println("Pasvu \n"+pasVu+"Combinaison \n"+otherCombinaison.combinaison[i]+"res\n"+pasVu.contains(otherCombinaison.combinaison[i]));
             //On compare si deux pion  on la meme couleur et non pas déja était vu si oui on passe la condition
-            if (pasVu.contains(otherCombinaison.combinaison[i])){
+            if (pasVu.contains(otherCombinaison.combinaison[i]) && comparateur.contains(otherCombinaison.combinaison[i])){
                 nbrBonneCouleur++;
                 bonneCouleur.add(otherCombinaison.combinaison[i]);
+                comparateur.remove(otherCombinaison.combinaison[i]);
                 pasVu.remove(otherCombinaison.combinaison[i]); 
             }
         }

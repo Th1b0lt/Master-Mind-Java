@@ -127,9 +127,9 @@ public class Plateau {
         
                 if ("s".equalsIgnoreCase(choix)) {
                     System.out.println("Entrez le chemin du fichier de sauvegarde :");
-                    String chemin = scanner.nextLine();
+                    String chemin = scanner.nextLine();//Recupere le chemin
 
-                    Path path = Paths.get(chemin);
+                    Path path = Paths.get(chemin); //creer un path
                     if (Files.exists(path)) {
                         System.out.println("Le fichier existe déjà. Voulez-vous le remplacer ? (Oui/Non)");
                         String reponse = scanner.nextLine();
@@ -138,14 +138,14 @@ public class Plateau {
                     }
                 }
 
-                save(path);
+                save(path); //Ecriture dans le fichier
                 return 0;
                 }
             }
             System.out.println("Donnez votre combinaison :\n");
             afficheCouleur();
            
-            combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
+            combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur); 
             
             
             ajouterLigne(this.numTour, combinaison);
@@ -166,9 +166,9 @@ public class Plateau {
 
         }
         for (int i = 0; i < plateau.length && plateau[i] != null; i++) {
-            plateau[i]=null;
+            plateau[i]=null;//Retour du plateau à null
         }
-        this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
+        this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);//creation d'une nouveau code secret pour la prochaine partie (pour le multi)
         return this.numTour;
     }
     
@@ -206,7 +206,7 @@ public class Plateau {
 
     public void save(Path path) {
         try {
-            ArrayList<String> lines = new ArrayList<>();
+            ArrayList<String> lines = new ArrayList<>(); //Liste qui sera ecrit dans le fichier
             
             // Sauvegarde des paramètres du jeu
             lines.add("difficulty=" + difficulty);
@@ -222,32 +222,33 @@ public class Plateau {
                 codeSecretStr+=codeSecret.getCombinaison()[j].getCouleur().getValue();
             }
             lines.add("CodeSecret=" +codeSecretStr);
-            for (int i = 0; i < plateau.length; i++) {
+
+            for (int i = 0; i < plateau.length; i++) {//Parcours de chaque combinaison entré dans la partie
                 if (plateau[i] != null) {
                     String combinaisonStr = "";
                     for (int j = 0; j < nbrPionts; j++) {
-                        combinaisonStr += plateau[i].getCombinaison()[j].getCouleur().getValue();
+                        combinaisonStr += plateau[i].getCombinaison()[j].getCouleur().getValue();//Ecriture de chaque valeur de la combinaison
                     }
-                    lines.add("Combinaison=" + combinaisonStr + "=" + i);
+                    lines.add("Combinaison=" + combinaisonStr + "=" + i);//ecriture de la combinaison puis du numéro de la combinaison
                 }
             }
             
     
-            Files.write(path, lines, StandardCharsets.UTF_8);
+            Files.write(path, lines, StandardCharsets.UTF_8);//Ecriture de la liste de nos données dans le fichier.
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();//Problème de fichier
         }
     }
 
     public void load(Path path) {
     int index=0;
     try {
-        ArrayList<String> lines = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+        ArrayList<String> lines = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));//Recuperation du fichier
         
         for (String line : lines) {
-            String[] parts = line.split("=");
+            String[] parts = line.split("=");//on separe avec le signe "=" ecrit dans save
             
-            switch (parts[0]) {
+            switch (parts[0]) {//Set tous les paramètres du jeu présent dans la sauvegarde, ainsi que le plateau
                 case "difficulty":
                     this.difficulty = Integer.parseInt(parts[1]);
                     System.out.println("Difficulty :  "+this.difficulty);
@@ -286,8 +287,7 @@ public class Plateau {
         }
 
     } catch (IOException e) {
-        e.printStackTrace();
-        System.out.println("Cest la que ca chie");
+        e.printStackTrace(); //erreur de fichier
 
     }
     System.out.println("La partie a été chargée. Continuons la partie avec " +(nbrCoups-index-1)+ " coups restants.");
