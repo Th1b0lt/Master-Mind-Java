@@ -255,32 +255,32 @@ public class Plateau {
                     break;
                 case "nbrCouleurs":
                     this.nbrCouleurs = Integer.parseInt(parts[1]);
-                    System.out.println("nbrcouleur:  "+this.nbrCouleurs);
+                    //System.out.println("nbrcouleur:  "+this.nbrCouleurs);
                     break;
                 case "nbrPionts":
                     this.nbrPionts = Integer.parseInt(parts[1]);
-                    System.out.println("nbrpion : "+this.nbrPionts);
+                    //System.out.println("nbrpion : "+this.nbrPionts);
                     break;
                 case "memeCouleur":
                     this.memeCouleur = Boolean.parseBoolean(parts[1]);
-                    System.out.println("Meme couleur ? " + this.memeCouleur);
+                    //System.out.println("Meme couleur ? " + this.memeCouleur);
                     break;
                 case "nbrCoups":
                     this.nbrCoups = Integer.parseInt(parts[1]);
-                    System.out.println("nbrCoups " + this.nbrCoups);
+                    //System.out.println("nbrCoups " + this.nbrCoups);
                     break;
                 case "numTour":
                     this.numTour=Integer.parseInt(parts[1]);
-                    System.out.println("numTour " + this.numTour);
+                    //System.out.println("numTour " + this.numTour);
                 case "CodeSecret":
                     this.codeSecret = new Combinaison(parts[1]);
-                    System.out.println(this.codeSecret.toString());
+                    //System.out.println(this.codeSecret.toString());
                     break;
                 case "Combinaison":
                      index = Integer.parseInt(parts[2]);
                     if (plateau[index] == null) {
                         plateau[index] = new Combinaison(parts[1]);
-                        System.out.println(this.plateau[index].toString());
+                        //System.out.println(this.plateau[index].toString());
                     }
                     break;
             }
@@ -291,6 +291,8 @@ public class Plateau {
 
     }
     System.out.println("La partie a été chargée. Continuons la partie avec " +(nbrCoups-index-1)+ " coups restants.");
+    System.out.println("Plateau actuel :\n" + toString());
+    afficheCouleur();
     }
 
     public void setNumTour(int num){

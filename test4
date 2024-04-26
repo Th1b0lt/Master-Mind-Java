@@ -1,7 +1,10 @@
-difficulty=0
-nbrCouleurs=6
+difficulty=2
+nbrCouleurs=8
 nbrPionts=4
 memeCouleur=true
-nbrCoups=12
-CodeSecret=4646
+nbrCoups=10
+numTour=3
+CodeSecret=6574
 Combinaison=1234=0
+Combinaison=1567=1
+Combinaison=1658=2

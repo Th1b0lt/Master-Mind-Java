@@ -83,9 +83,7 @@ public class Menu {
     }
     public int chargerPartie(Path path){
         Plateau jeu=new Plateau(1);
-        System.out.println("Test1");
         jeu.load(path);
-        System.out.println("test2");
         return jeu.inGame();
     }
 
@@ -115,10 +113,12 @@ public class Menu {
                 System.out.println("Le Joueur 2 a fini son tour !\n\n");
             }
             System.out.println("TOUR DU JOUEUR 1 \n \n");
+            j.afficheCouleur();
             score1+=j.inGame();
             j.setNumTour(0);
             clearConsole();
             System.out.println("Le Joueur 1 a trouvé !\n\nTOUR DU JOUEUR 2 \n \n");
+            j.afficheCouleur();
             score2+=j.inGame();
             j.setNumTour(0);
             clearConsole();
