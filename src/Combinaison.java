@@ -114,6 +114,7 @@ public class Combinaison{
             }
         }
     }
+
     public Combinaison(String strCombinaison) {
         this.taille = strCombinaison.length();
         this.combinaison = new Pion[taille];
@@ -122,20 +123,25 @@ public class Combinaison{
             this.combinaison[i] = new Pion(Couleur.getCouleurByValue(value));
         }
     }
+
     public Combinaison(Pion[] combinaison,int taille ){
         this.taille=taille;
         this.combinaison=combinaison;
     }
+
+    //Méthode pour comparer une combinaison avec le code secret
     private Object[] compare(Combinaison otherCombinaison){
         int nbrBienPlace = 0;
         int nbrBonneCouleur = 0;
-        int[] dejaVu = new int[taille];
+        //On crée un tableau pour stocker la position des pions déja traiter(pour eviter de les compter deux fois)
+        int[] dejaVu = new int[taille]; 
         
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
         ArrayList<Pion> bonneCouleur = new ArrayList<>();
     
         // Trouver les pions bien placés
         for (int i = 0; i < this.taille; i++){
+            //On compare si deux pion placés au même endroit on la meme couleur si oui on passe la condition
             if (this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[i].getCouleur() )){
                 nbrBienPlace++;
                 pionsBienPlacees.add(this.combinaison[i]);
@@ -146,22 +152,29 @@ public class Combinaison{
         // Trouver les pions de la bonne couleur mais mal placés
         for (int i = 0; i < this.taille; i++){
             for (int j = 0; j < this.taille; j++){
-                if (i!=j &&this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur()) && !(dejaVu[j]==1)){
+                //On compare si deux pion  on la meme couleur et non pas déja était vu si oui on passe la condition
+                if (i!=j &&this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur()) && dejaVu[j]==0){
                     nbrBonneCouleur++;
                     bonneCouleur.add(this.combinaison[i]);
-                    dejaVu[i]=1;
+                    dejaVu[j]=1;
                     break;
                 }
             }
             
         }
-    
+        //Test pour dejaVu
+        /* 
+        for (int i = 0; i < this.taille; i++){
+            System.out.println("Dejavu i:"+i+dejaVu[i]);
+        }
+        */
+         //On stocke les différentes informations voulu, pionsBienPlacees et bonneCouleur ne servent que pour le mode facile
         Object[] result = new Object[4];
         result[0] = pionsBienPlacees;
         result[1] = bonneCouleur;
         result[2] = nbrBienPlace;
         result[3] = nbrBonneCouleur;
-    
+        //On renvoie le résultat de la comparaison
         return result;
     }
    

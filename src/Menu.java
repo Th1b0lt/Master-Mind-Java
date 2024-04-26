@@ -91,7 +91,7 @@ public class Menu {
 
     public int lancerPartie(){
         int nbrCoupsJouer;
-        Plateau j= new Plateau();
+        Plateau j= new Plateau(false);
         nbrCoupsJouer=j.inGame();
         return nbrCoupsJouer;
     }
@@ -99,7 +99,7 @@ public class Menu {
     public void jeuMulti(){
         int nbrPartie=0,score1=0,score2=0;
         System.out.println("Mode multijoueur\n \n");
-        Plateau j = new Plateau();
+        Plateau j = new Plateau(true);
         boolean validInput = false;
         while (!validInput) {
             try {
@@ -112,7 +112,7 @@ public class Menu {
         clearConsole();
         for(int i=0;i<nbrPartie;i++){
             if(i>0){
-                System.out.println("Le Joueur 2 a trouvé !\n\n");
+                System.out.println("Le Joueur 2 a fini son tour !\n\n");
             }
             System.out.println("TOUR DU JOUEUR 1 \n \n");
             score1+=j.inGame();
@@ -122,20 +122,26 @@ public class Menu {
             score2+=j.inGame();
             j.setNumTour(0);
             clearConsole();
-
         }
         clearConsole();
         if(score1==score2){
             System.out.println("Egalité bravo à vous deux ! Le score est de "+score1+"-"+score2);
         }
         else if(score1<score2){
-            System.out.println("Le premier joueur à gagné, bravo à lui Le score est de "+score1+"-"+score2);
+            System.out.println("Le premier joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
         else{
-            System.out.println("Le second joueur à gagné, bravo à lui Le score est de "+score1+"-"+score2);
+            System.out.println("Le second joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
         }
     }
-
+    public static void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        }
+        catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
     public void afficherRegle(){
         System.out.println("Résumé des règles du Mastermind :\n" + //
         
