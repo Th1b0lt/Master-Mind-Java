@@ -116,6 +116,8 @@ public class Plateau {
                 fin=true;
                 break;
             }
+            //System.out.println(" la combinaison est : "+ codeSecret.toString());
+
             System.out.println("Plateau actuel :\n" + toString());
             System.out.println("Tour " + (this.numTour + 1) + " / " + nbrCoups);
             if(!multi){

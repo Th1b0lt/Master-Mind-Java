@@ -80,7 +80,9 @@ public class Combinaison{
         }
     }
 
+    //Constructeur combinaison pour le code secret(la combinaison est aléatoire)
     public Combinaison(int taille,int nbrCouleurs, boolean memeCouleur, boolean random){
+        //On s'assure d'utiliser le bon constructeur
         if(!(random)){
             throw new IllegalArgumentException("mauvais constructeur ! Random doit etre vrai\n");
         }
@@ -134,7 +136,10 @@ public class Combinaison{
         int nbrBienPlace = 0;
         int nbrBonneCouleur = 0;
         //On crée un tableau pour stocker la position des pions déja traiter(pour eviter de les compter deux fois)
-        int[] dejaVu = new int[taille]; 
+        ArrayList<Pion> pasVu = new ArrayList<>();
+        for (int i = 0; i < this.taille; i++){
+            pasVu.add(this.combinaison[i]);
+        }
         
         ArrayList<Pion> pionsBienPlacees = new ArrayList<>();
         ArrayList<Pion> bonneCouleur = new ArrayList<>();
@@ -142,32 +147,23 @@ public class Combinaison{
         // Trouver les pions bien placés
         for (int i = 0; i < this.taille; i++){
             //On compare si deux pion placés au même endroit on la meme couleur si oui on passe la condition
-            if (this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[i].getCouleur() )){
+            if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i])==1){
                 nbrBienPlace++;
                 pionsBienPlacees.add(this.combinaison[i]);
-                dejaVu[i]=1;
+                pasVu.remove(this.combinaison[i]);
             }
         }
     
         // Trouver les pions de la bonne couleur mais mal placés
         for (int i = 0; i < this.taille; i++){
-            for (int j = 0; j < this.taille; j++){
-                //On compare si deux pion  on la meme couleur et non pas déja était vu si oui on passe la condition
-                if (i!=j &&this.combinaison[i].getCouleur().equals(otherCombinaison.combinaison[j].getCouleur()) && dejaVu[j]==0){
-                    nbrBonneCouleur++;
-                    bonneCouleur.add(this.combinaison[i]);
-                    dejaVu[j]=1;
-                    break;
-                }
+            //System.out.println("Pasvu \n"+pasVu+"Combinaison \n"+otherCombinaison.combinaison[i]+"res\n"+pasVu.contains(otherCombinaison.combinaison[i]));
+            //On compare si deux pion  on la meme couleur et non pas déja était vu si oui on passe la condition
+            if (pasVu.contains(otherCombinaison.combinaison[i])){
+                nbrBonneCouleur++;
+                bonneCouleur.add(otherCombinaison.combinaison[i]);
+                pasVu.remove(otherCombinaison.combinaison[i]); 
             }
-            
         }
-        //Test pour dejaVu
-        /* 
-        for (int i = 0; i < this.taille; i++){
-            System.out.println("Dejavu i:"+i+dejaVu[i]);
-        }
-        */
          //On stocke les différentes informations voulu, pionsBienPlacees et bonneCouleur ne servent que pour le mode facile
         Object[] result = new Object[4];
         result[0] = pionsBienPlacees;
@@ -179,7 +175,7 @@ public class Combinaison{
     }
    
     
-
+    //Méthode permettant d'afficher le résultat de la comparaison pour les modes de difficultés autre que facile
     public boolean afficheCompareDifficile(Combinaison otherCombinaison){
         Object comparaison[]=compare(otherCombinaison);
         System.out.println("Nombre de pions bien placés: " + comparaison[2]);
@@ -189,6 +185,8 @@ public class Combinaison{
         }
         return false;
     }
+
+    //Méthode permettant d'afficher le résultat de la comparaison pour le mode facile
     public boolean afficheComparefacile(Combinaison otherCombinaison){
         Object comparaison[]=compare(otherCombinaison);
         System.out.println("Liste des pions bien placés : "+ comparaison[0]);
@@ -208,6 +206,8 @@ public class Combinaison{
     public Pion[] getCombinaison(){
         return combinaison;
     }
+
+    //On redéfini la méthode toString pour afficher le plateau de combinaison
     @Override
     public String toString(){
         String retour="";

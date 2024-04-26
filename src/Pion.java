@@ -14,7 +14,18 @@ public class Pion{
     public String colorie(){
         return this.c.getCodeCouleur();
     }
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Pion)) {
+            return false;
+        }
+        Pion other = (Pion) obj;
+        // Comparez ici les attributs pertinents pour déterminer l'égalité
+        return this.c.equals(other.c);
+    }
 
 
     @Override
