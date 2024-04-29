@@ -33,9 +33,9 @@ public class JeuMulti{
                 System.out.println("Veuillez entrer un nombre valide.");
             }
         }
-        while ( this.nbrJoueur<2|| !validInput1) {
+        while ( this.nbrJoueur<2 ||this.nbrJoueur>10|| !validInput1) {
             try {
-                this.nbrJoueur = Integer.parseInt(System.console().readLine("Combien de Joueur veulent jouer (nombre supérieur à 1) ?\n"));
+                this.nbrJoueur = Integer.parseInt(System.console().readLine("Combien de Joueur veulent jouer (nombre entre 2 et 10 inclus) ?\n"));
                 validInput1=true;
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrer un nombre valide.");
@@ -61,6 +61,7 @@ public class JeuMulti{
         this.scores= new int[this.nbrJoueur];
         this.noms = new String[this.nbrJoueur];
         this.j =new Plateau();
+        this.j.setMulti();
         loadMulti(path);
     }
     public void enJeuMulti(){
@@ -95,7 +96,6 @@ public class JeuMulti{
                     return ;
                     }
                 }
-                wait(1000);
                 clearConsole();
                 System.out.println(noms[k]+" a fini son tour !\n\n");
                 wait(2000);
@@ -109,6 +109,8 @@ public class JeuMulti{
         //Affichage du classement des joueurs
         System.out.println("Classement des joueurs :");
         countdown(3000);
+        clearConsole();
+        System.out.println("Classement des joueurs :");
         for (int i = 0; i < nbrJoueur; i++) {
             int minIndex = 0;
             int minScore = Integer.MAX_VALUE;
@@ -121,9 +123,9 @@ public class JeuMulti{
                 }
             }
 
-            wait(1000);
-            System.out.println((i + 1) + ". " + noms[minIndex] + " - Score: " + scores[minIndex]);
+            System.out.println((nbrJoueur-i) + ". " + noms[minIndex] + " - Score: " + scores[minIndex]);
             scores[minIndex] = Integer.MAX_VALUE; 
+            wait(1000);
         }
 
     }

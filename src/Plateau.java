@@ -260,6 +260,9 @@ public class Plateau {
     public void setNumTour(int num){
         this.numTour=num;
     }
+    public void setMulti(){
+        this.multi=true;
+    }
 
     //Méthode pour afficher les listes de couleurs selon la difficulté
     public void afficheCouleur(){
