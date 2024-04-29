@@ -119,7 +119,7 @@ public class Menu {
         clearConsole();
         for(int i=0;i<nbrPartie;i++){
             for (int k=0;k<nbrJoueur;k++){
-                
+                validInput2 = false;
                 if (i==0){
                     while (!validInput2) {
                         try {
