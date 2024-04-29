@@ -108,14 +108,14 @@ public class JeuMulti{
         clearConsole();
         //Affichage du classement des joueurs
         System.out.println("Classement des joueurs :");
-        countdown(3000)
+        countdown(3000);
         for (int i = 0; i < nbrJoueur; i++) {
             int minIndex = 0;
             int minScore = Integer.MAX_VALUE;
 
         
             for (int z = 0; z < nbrJoueur; z++) {
-                if (scores[z] < maxScore) {
+                if (scores[z] < minScore) {
                     minScore = scores[z];
                     minIndex = z;
                 }
