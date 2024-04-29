@@ -40,7 +40,7 @@ public enum Couleur{
         return null;
     }
      // Méthode pour afficher la couleur dans la console
-     public void afficherTexteEnCouleur(String texte) {
-        System.out.println(codeCouleur + texte + "\u001b[0m");
+     public String afficherTexteEnCouleur(String texte) {
+        return codeCouleur + texte + "\u001b[0m";
     }
 }

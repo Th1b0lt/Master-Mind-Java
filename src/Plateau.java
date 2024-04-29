@@ -61,7 +61,8 @@ public class Plateau {
         this.plateau= new Combinaison[nbrCoups];
 
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);
-        afficheCouleur();
+        System.out.println(afficheCouleur());
+
     }
 
     //Constructeur d'un plateau par défault
@@ -82,6 +83,8 @@ public class Plateau {
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         ajouterLigne(this.numTour, combinaison);
         this.numTour++; // Incrémente le numéro du tour
+        clearConsole();
+        System.out.println("Resultat du tour précédent :\n");
         if(difficulty==0){
             res=combinaison.afficheComparefacile(getCodeSecret());
         }
@@ -91,11 +94,8 @@ public class Plateau {
         if(res==true){
             fin=true;
         }
-        clearConsole();
-        
+
         while (!fin && this.numTour < nbrCoups) {
-            
-            //System.out.println(" la combinaison est : "+ codeSecret.toString());
 
             System.out.println("Plateau actuel :\n" + toString());
             System.out.println("Tour " + (this.numTour + 1) + " / " + nbrCoups);
@@ -122,7 +122,7 @@ public class Plateau {
                 }
             }
             System.out.println("Donnez votre combinaison :\n");
-            afficheCouleur();
+            System.out.println(afficheCouleur());
            
             combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur); 
             
@@ -131,7 +131,6 @@ public class Plateau {
             this.numTour++; // Incrémente le numéro du tour
             clearConsole();
             System.out.println("Resultat du tour précédent :\n");
-
             if(difficulty==0){
                 res=combinaison.afficheComparefacile(getCodeSecret());
             }
@@ -142,6 +141,7 @@ public class Plateau {
                 fin=true;
                 break;
             }
+
     
 
         }
@@ -263,7 +263,8 @@ public class Plateau {
     }
    
     System.out.println("Plateau actuel :\n" + toString());
-    afficheCouleur();
+    System.out.println(afficheCouleur());
+    
     }
 
     public void setNumTour(int num){
@@ -274,27 +275,17 @@ public class Plateau {
     }
 
     //Méthode pour afficher les listes de couleurs selon la difficulté
-    public void afficheCouleur(){
-        if(nbrCouleurs==6){
-            System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont  :\n" + //
-        "1: \u001b[31m\u2B24  " + //
-        "\u001B[37m2: \u001B[34m\u2B24  " + //
-        "\u001B[37m3: \u001B[32m\u2B24\n" + //
-        "\u001B[37m4: \u001B[33m\u2B24  " + //
-        "\u001B[37m5: \u001B[35m\u2B24  " + //
-        "\u001B[37m6: \033[95m\u2B24\u001B[37m \n");
+    public String afficheCouleur(){
+        String resultat="";
+        resultat+="Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont :\n";
+        for(int i=1;i<this.nbrCouleurs+1;i++){
+            Couleur color=Couleur.getCouleurByValue(i);
+            resultat+=i+": "+color.afficherTexteEnCouleur("\u2B24")+"  ";
+            if(nbrCouleurs/2==i){
+               resultat+="\n";
+            }
         }
-        else{
-            System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont :\n" + //
-        "1: \u001b[31m\u2B24  " + //
-        "\u001B[37m2: \u001B[34m\u2B24  " + //
-        "\u001B[37m3: \u001B[32m\u2B24  " + //
-        "\u001B[37m4: \u001B[33m\u2B24\n" + //
-        "\u001B[37m5: \u001B[35m\u2B24  " + //
-        "\u001B[37m6: \033[95m\u2B24\u001B[37m  " + //
-        "\u001B[37m7: \u001B[36m\u2B24  "+ //
-        "\u001B[37m8: \u001B[37m\u2B24 \n");
-        }
+        return resultat;
     }
 
     //Méthode pour vérifier que c'est un entier
