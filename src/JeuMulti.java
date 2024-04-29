@@ -108,22 +108,22 @@ public class JeuMulti{
         clearConsole();
         //Affichage du classement des joueurs
         System.out.println("Classement des joueurs :");
+        countdown(3000)
         for (int i = 0; i < nbrJoueur; i++) {
-            int maxIndex = 0;
-            int maxScore = Integer.MIN_VALUE;
+            int minIndex = 0;
+            int minScore = Integer.MAX_VALUE;
 
         
             for (int z = 0; z < nbrJoueur; z++) {
-                if (scores[z] > maxScore) {
-                    maxScore = scores[z];
-                    maxIndex = z;
+                if (scores[z] < maxScore) {
+                    minScore = scores[z];
+                    minIndex = z;
                 }
             }
 
-            wait(3000);
-            System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
-            scores[maxIndex] = Integer.MIN_VALUE; 
-            wait(200);
+            wait(1000);
+            System.out.println((i + 1) + ". " + noms[minIndex] + " - Score: " + scores[minIndex]);
+            scores[minIndex] = Integer.MAX_VALUE; 
         }
 
     }
@@ -135,6 +135,21 @@ public class JeuMulti{
             Thread.currentThread().interrupt();
         }
     }
+    public static void countdown(int ms) {
+        try {
+            System.out.println("3 !\r");
+            Thread.sleep(ms/3);
+            System.out.println("2 !\r");
+            Thread.sleep(ms/3);
+            System.out.println("1 !\r");
+            Thread.sleep(ms/3);
+
+        }
+        catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
 
     public void saveMulti(Path path){
         try {

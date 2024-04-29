@@ -119,15 +119,7 @@ public class Menu {
         return nbrCoupsJouer;
     }
 
-    public static void wait(int ms) {
-        try {
-            Thread.sleep(ms);
-        }
-        catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
-
+ 
   
 
     private void afficherRegle(){
@@ -148,7 +140,9 @@ public class Menu {
             "Défaite : Le joueur perd s'il n'arrive pas à deviner la combinaison secrète dans le nombre de tours imparti.\n");
     }
 
-
+    private static void clearLigne(){
+        System.out.print("\033[1A\033[K");
+    }
     private void clearConsole() {
         final String ESC = "\033[";
         System.out.print (ESC + "2J");
