@@ -82,7 +82,7 @@ public class Menu {
         System.out.flush();
     }
     public int chargerPartie(Path path){
-        Plateau jeu=new Plateau(1);
+        Plateau jeu=new Plateau();
         jeu.load(path);
         return jeu.inGame();
     }
@@ -121,9 +121,7 @@ public class Menu {
         clearConsole();
         for(int i=0;i<nbrPartie;i++){
             for (int k=0;k<nbrJoueur;k++){
-                if(i>0){
-                    System.out.println(noms[k]+" a fini son tour !\n\n");
-                }
+                
                 if (i==0){
                     while (!validInput2) {
                         try {
@@ -141,6 +139,7 @@ public class Menu {
                 j.setNumTour(0);
                 clearConsole();
                 System.out.println("Le Joueur "+noms[k]+" a trouvé !\n\n");
+                System.out.println(noms[k]+" a fini son tour !\n\n");
             }
         }
         clearConsole();

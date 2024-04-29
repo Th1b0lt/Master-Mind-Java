@@ -63,9 +63,12 @@ public class Plateau {
         afficheCouleur();
     }
 
-    public Plateau(int a){
+    //Constructeur d'un plateau par défault
+    public Plateau(){
         this.plateau=new Combinaison[nbrCoups];
     }
+
+    //Méthode pour vérifier que c'est un entier
     private int obtenirEntier(String message) {
         while (true) {
             try {
@@ -76,6 +79,7 @@ public class Plateau {
         }
     }
     
+    //Méthode pour vérifier que c'est choix
     private int obtenirChoix(int min, int max, String message) {
         int choix;
         do {
@@ -83,6 +87,8 @@ public class Plateau {
         } while (choix < min || choix > max);
         return choix;
     }
+
+    //Méthode pour clear la console
     private void clearConsole() {
         final String ESC = "\033[";
         System.out.print (ESC + "2J");
@@ -171,36 +177,13 @@ public class Plateau {
         this.codeSecret= new Combinaison(nbrPionts,nbrCouleurs,memeCouleur,true);//creation d'une nouveau code secret pour la prochaine partie (pour le multi)
         return this.nbrCoups-this.numTour;
     }
-    
 
-
-
-    public void afficheCouleur(){
-        if(nbrCouleurs==6){
-            System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont  :\n" + //
-        "1: \u001b[31m\u2B24  " + //
-        "\u001B[37m2: \u001B[34m\u2B24  " + //
-        "\u001B[37m3: \u001B[32m\u2B24\n" + //
-        "\u001B[37m4: \u001B[33m\u2B24  " + //
-        "\u001B[37m5: \u001B[35m\u2B24  " + //
-        "\u001B[37m6: \033[95m\u2B24\u001B[37m \n");
-        }
-        else{
-            System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont :\n" + //
-        "1: \u001b[31m\u2B24  " + //
-        "\u001B[37m2: \u001B[34m\u2B24  " + //
-        "\u001B[37m3: \u001B[32m\u2B24  " + //
-        "\u001B[37m4: \u001B[33m\u2B24\n" + //
-        "\u001B[37m5: \u001B[35m\u2B24  " + //
-        "\u001B[37m6: \033[95m\u2B24\u001B[37m  " + //
-        "\u001B[37m7: \u001B[36m\u2B24  "+ //
-        "\u001B[37m8: \u001B[37m\u2B24 \n");
-        }
-    }
+    //Méthode pour ajouter une ligne au plateau
     public void ajouterLigne(int numTour, Combinaison c){
         this.plateau[numTour]=c;
     }
-    public Combinaison getCodeSecret(){
+    //getter pour le code secret
+    private Combinaison getCodeSecret(){
         return codeSecret;
     }
 
@@ -297,6 +280,30 @@ public class Plateau {
 
     public void setNumTour(int num){
         this.numTour=num;
+    }
+
+    
+    public void afficheCouleur(){
+        if(nbrCouleurs==6){
+            System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont  :\n" + //
+        "1: \u001b[31m\u2B24  " + //
+        "\u001B[37m2: \u001B[34m\u2B24  " + //
+        "\u001B[37m3: \u001B[32m\u2B24\n" + //
+        "\u001B[37m4: \u001B[33m\u2B24  " + //
+        "\u001B[37m5: \u001B[35m\u2B24  " + //
+        "\u001B[37m6: \033[95m\u2B24\u001B[37m \n");
+        }
+        else{
+            System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont :\n" + //
+        "1: \u001b[31m\u2B24  " + //
+        "\u001B[37m2: \u001B[34m\u2B24  " + //
+        "\u001B[37m3: \u001B[32m\u2B24  " + //
+        "\u001B[37m4: \u001B[33m\u2B24\n" + //
+        "\u001B[37m5: \u001B[35m\u2B24  " + //
+        "\u001B[37m6: \033[95m\u2B24\u001B[37m  " + //
+        "\u001B[37m7: \u001B[36m\u2B24  "+ //
+        "\u001B[37m8: \u001B[37m\u2B24 \n");
+        }
     }
 
     @Override
