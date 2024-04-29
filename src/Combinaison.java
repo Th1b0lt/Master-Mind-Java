@@ -56,7 +56,7 @@ public class Combinaison{
                 while(!(bon)){
                     bon=true;
                     for(int j=0;j<i;j++){
-                        if(newPion.compareTo(combinaison[j])==1){
+                        if(newPion.equals(combinaison[j])){
                             bon=false;
                         }
                     }
@@ -105,7 +105,7 @@ public class Combinaison{
                         newPion=new Pion(Couleur.getCouleurByValue(randomNumbers.nextInt(nbrCouleurs)+1));
                         bon=true;
                         for(int j=0;j<i;j++){
-                            if(newPion.compareTo(combinaison[j])==1){
+                            if(newPion.equals(combinaison[j])){
                                 bon=false;
                             }
                         }
@@ -149,7 +149,7 @@ public class Combinaison{
         // Trouver les pions bien placés
         for (int i = 0; i < this.taille; i++){
             //On compare si deux pion placés au même endroit on la meme couleur si oui on passe la condition
-            if (this.combinaison[i].compareTo(otherCombinaison.combinaison[i])==1){
+            if (this.combinaison[i].equals(otherCombinaison.combinaison[i])){
                 nbrBienPlace++;
                 pionsBienPlacees.add(this.combinaison[i]);
                 comparateur.remove(otherCombinaison.combinaison[i]);

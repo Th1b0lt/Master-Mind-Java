@@ -17,15 +17,7 @@ public class Pion{
     public String colorie(){
         return this.c.getCodeCouleur();
     }
-    //Méthode pour comparer deux pion
-    public int compareTo(Pion pion1){
-        if(pion1.getCouleur() == this.getCouleur()){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
+   
     //Redéfinition du equals pour les pions (pour permettre l'utilisation de contains)
     @Override
     public boolean equals(Object obj) {
