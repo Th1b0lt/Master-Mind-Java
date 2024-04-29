@@ -96,13 +96,13 @@ public class Menu {
         int nbrPartie=0,nbrJoueur=0;
         System.out.println("Mode multijoueur\n \n");
         Plateau j = new Plateau(true);
-        boolean validInput1 = false;
+    
         boolean validInput2 = false;
         
-        while (!validInput1) {
+        while (nbrPartie<1) {
             try {
                 nbrPartie = Integer.parseInt(System.console().readLine("Combien de partie pour vous départager ?\n"));
-                validInput1 = true;
+           
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrer un nombre valide.");
             }
@@ -121,7 +121,6 @@ public class Menu {
             for (int k=0;k<nbrJoueur;k++){
                 
                 if (i==0){
-                    validInput2=false;
                     while (!validInput2) {
                         try {
                             noms[k] = (System.console().readLine("Pseudo du joueur "+(k+1)+"?\n"));
@@ -158,7 +157,8 @@ public class Menu {
     
             wait(3000);
             System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
-            scores[maxIndex] = Integer.MIN_VALUE; // Set to min value to avoid reselection
+            scores[maxIndex] = Integer.MIN_VALUE; 
+            wait(200);
         }
 
     }
