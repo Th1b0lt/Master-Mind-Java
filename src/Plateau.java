@@ -77,26 +77,24 @@ public class Plateau {
         Scanner scanner = new Scanner(System.in);
         this.fin=false;
         //Decomenter pour tester
-        System.out.println(" la combinaison est : "+ codeSecret.toString());
+        //System.out.println(" la combinaison est : "+ codeSecret.toString());
         System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         ajouterLigne(this.numTour, combinaison);
         this.numTour++; // Incrémente le numéro du tour
-
-    
+        if(difficulty==0){
+            res=combinaison.afficheComparefacile(getCodeSecret());
+        }
+        else{
+            res=combinaison.afficheCompareDifficile(getCodeSecret());
+        }
+        if(res==true){
+            fin=true;
+        }
+        clearConsole();
+        
         while (!fin && this.numTour < nbrCoups) {
-            clearConsole();
-            System.out.println("Resultat du tour précédent :\n");
-            if(difficulty==0){
-                res=combinaison.afficheComparefacile(getCodeSecret());
-            }
-            else{
-                res=combinaison.afficheCompareDifficile(getCodeSecret());
-            }
-            if(res==true){
-                fin=true;
-                break;
-            }
+            
             //System.out.println(" la combinaison est : "+ codeSecret.toString());
 
             System.out.println("Plateau actuel :\n" + toString());
@@ -131,8 +129,19 @@ public class Plateau {
             
             ajouterLigne(this.numTour, combinaison);
             this.numTour++; // Incrémente le numéro du tour
+            clearConsole();
+            System.out.println("Resultat du tour précédent :\n");
 
-
+            if(difficulty==0){
+                res=combinaison.afficheComparefacile(getCodeSecret());
+            }
+            else{
+                res=combinaison.afficheCompareDifficile(getCodeSecret());
+            }
+            if(res==true){
+                fin=true;
+                break;
+            }
     
 
         }
