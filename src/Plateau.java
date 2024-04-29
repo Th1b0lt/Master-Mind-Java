@@ -149,10 +149,10 @@ public class Plateau {
         System.out.println("\nPlateau final :\n" + toString());
 
         if(!fin){
-            System.out.println("Vous avez perdu...\n \n La solution étais :  " + getCodeSecret().toString());
+            System.out.println("Vous avez perdu...\n \n La solution était :  " + getCodeSecret().toString());
         }
         else{
-            System.out.println("Bravo vous avez gagné ! La solution étais :  " + getCodeSecret().toString());
+            System.out.println("Bravo vous avez gagné ! La solution était :  " + getCodeSecret().toString());
 
         }
         for (int i = 0; i < plateau.length && plateau[i] != null; i++) {
