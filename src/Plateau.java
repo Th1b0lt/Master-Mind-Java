@@ -77,7 +77,7 @@ public class Plateau {
         Scanner scanner = new Scanner(System.in);
         this.fin=false;
         //Decomenter pour tester
-        //System.out.println(" la combinaison est : "+ codeSecret.toString());
+        System.out.println(" la combinaison est : "+ codeSecret.toString());
         System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);
         combinaison = new Combinaison(nbrPionts, nbrCouleurs, memeCouleur);
         ajouterLigne(this.numTour, combinaison);
@@ -162,39 +162,43 @@ public class Plateau {
         return codeSecret;
     }
 
-    public void save(Path path) {
-        try {
-            ArrayList<String> lines = new ArrayList<>(); //Liste qui sera ecrit dans le fichier
+    public ArrayList<String> enregistre() {
+        ArrayList<String> lines = new ArrayList<>(); //Liste qui sera ecrit dans le fichier
             
-            // Sauvegarde des paramètres du jeu
-            lines.add("difficulty=" + difficulty);
-            lines.add("nbrCouleurs=" + nbrCouleurs);
-            lines.add("nbrPionts=" + nbrPionts);
-            lines.add("memeCouleur=" + memeCouleur);
-            lines.add("nbrCoups=" + nbrCoups);
-            lines.add("numTour="+ numTour);
+        // Sauvegarde des paramètres du jeu
+        lines.add("difficulty=" + difficulty);
+        lines.add("nbrCouleurs=" + nbrCouleurs);
+        lines.add("nbrPionts=" + nbrPionts);
+        lines.add("memeCouleur=" + memeCouleur);
+        lines.add("nbrCoups=" + nbrCoups);
+        lines.add("numTour="+ numTour);
             
-            // Sauvegarde du code secret et des combinaisons du plateau
-            String codeSecretStr="";
-            for (int j=0; j<nbrPionts;j++){
-                codeSecretStr+=codeSecret.getCombinaison()[j].getCouleur().getValue();
-            }
-            lines.add("CodeSecret=" +codeSecretStr);
+        // Sauvegarde du code secret et des combinaisons du plateau
+        String codeSecretStr="";
+        for (int j=0; j<nbrPionts;j++){
+            codeSecretStr+=codeSecret.getCombinaison()[j].getCouleur().getValue();
+        }
+        lines.add("CodeSecret=" +codeSecretStr);
 
-            for (int i = 0; i < plateau.length; i++) {//Parcours de chaque combinaison entré dans la partie
-                if (plateau[i] != null) {
-                    String combinaisonStr = "";
-                    for (int j = 0; j < nbrPionts; j++) {
-                        combinaisonStr += plateau[i].getCombinaison()[j].getCouleur().getValue();//Ecriture de chaque valeur de la combinaison
-                    }
-                    lines.add("Combinaison=" + combinaisonStr + "=" + i);//ecriture de la combinaison puis du numéro de la combinaison
+        for (int i = 0; i < plateau.length; i++) {//Parcours de chaque combinaison entré dans la partie
+            if (plateau[i] != null) {
+                String combinaisonStr = "";
+                for (int j = 0; j < nbrPionts; j++) {
+                    combinaisonStr += plateau[i].getCombinaison()[j].getCouleur().getValue();//Ecriture de chaque valeur de la combinaison
                 }
+                lines.add("Combinaison=" + combinaisonStr + "=" + i);//ecriture de la combinaison puis du numéro de la combinaison
             }
-            
-    
-            Files.write(path, lines, StandardCharsets.UTF_8);//Ecriture de la liste de nos données dans le fichier.
-        } catch (IOException e) {
-            e.printStackTrace();//Problème de fichier
+        }
+        return lines;
+      
+    }
+    public void save(Path path){
+        ArrayList<String> lines=enregistre();
+        try{
+        Files.write(path, lines, StandardCharsets.UTF_8);
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -248,7 +252,7 @@ public class Plateau {
         e.printStackTrace(); //erreur de fichier
 
     }
-    System.out.println("La partie a été chargée. Continuons la partie avec " +(nbrCoups-index-1)+ " coups restants.");
+   
     System.out.println("Plateau actuel :\n" + toString());
     afficheCouleur();
     }

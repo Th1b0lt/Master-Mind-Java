@@ -1,0 +1,17 @@
+difficulty=0
+nbrCouleurs=6
+nbrPionts=4
+memeCouleur=false
+nbrCoups=12
+numTour=0
+CodeSecret=4316
+nbrPartie=3
+nbrJoueur=3
+nbrTour=1
+joueurActuel=01
+nomJoueur=moi=0
+scoreJoueur=22=0
+nomJoueur=toi=1
+scoreJoueur=11=1
+nomJoueur=eux=2
+scoreJoueur=8=2
