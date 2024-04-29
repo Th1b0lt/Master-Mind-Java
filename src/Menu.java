@@ -33,7 +33,34 @@ public class Menu {
             }
             if (reponse.equalsIgnoreCase("m")) {
                 clearConsole();
-                jeuMulti();
+                reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
+                while (!reponse.equalsIgnoreCase("o") && !reponse.equalsIgnoreCase("n")) {
+                    System.out.println("Veuillez répondre par 'o' pour oui ou 'n' pour non.");
+                    reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
+                }
+                if (reponse.equalsIgnoreCase("o")) {
+                    boolean fichierValide = false;
+                    Path path = null;
+    
+                    while (!fichierValide) {
+                        String chemin = System.console().readLine("Veuillez entrer le chemin du fichier de sauvegarde : ");
+                        path = Paths.get(chemin);
+        
+                        if (Files.exists(path) && !Files.isDirectory(path)) {
+                            fichierValide = true;
+                        } else {
+                             System.out.println("Le fichier n'existe pas ou est incorrect. Veuillez réessayer.");
+                        }
+                    }
+    
+                    clearConsole();
+                    JeuMulti jeu = new JeuMulti(path);
+                    jeu.enJeuMulti();
+                } else {
+                    System.out.println("Nouvelle partie :\n");
+                    JeuMulti jeu =new JeuMulti();
+                    jeu.enJeuMulti();
+                }
             } else {
                 clearConsole();
                 reponse = System.console().readLine("Voulez-vous charger une partie existante ? (o/n)");
@@ -82,6 +109,7 @@ public class Menu {
         jeu.load(path);
         return jeu.inGame();
     }
+    
 
     //Méthode pour lancer une partie solo
     public int lancerPartie(){
@@ -91,92 +119,8 @@ public class Menu {
         return nbrCoupsJouer;
     }
 
-    //Méthode pour lancer une partie multijoueur
-    public void jeuMulti(){
-        int nbrPartie=0,nbrJoueur=0;
-        System.out.println("Mode multijoueur\n \n");
-        Plateau j = new Plateau(true);
-    
-        boolean validInput2 = false;
-        
-        while (nbrPartie<1) {
-            try {
-                nbrPartie = Integer.parseInt(System.console().readLine("Combien de partie pour vous départager ?\n"));
-           
-            } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer un nombre valide.");
-            }
-        }
-        while ( nbrJoueur<1) {
-            try {
-                nbrJoueur = Integer.parseInt(System.console().readLine("Combien de Joueur veulent jouer (nombre supérieur à 1) ?\n"));
-            } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer un nombre valide.");
-            }
-        }
-        int[] scores= new int[nbrJoueur];
-        String[] noms = new String[nbrJoueur]; // Pour stocker les noms des joueurs
-        clearConsole();
-        for(int i=0;i<nbrPartie;i++){
-            for (int k=0;k<nbrJoueur;k++){
-                validInput2 = false;
-                if (i==0){
-                    while (!validInput2) {
-                        try {
-                            noms[k] = (System.console().readLine("Pseudo du joueur "+(k+1)+"?\n"));
-                            validInput2 = true;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Veuillez entrer une chaine de caractère.");
-                        }
-                    }
-                }
-                
-                System.out.println("TOUR DE "+noms[k].toUpperCase()+" \n \n");
-                j.afficheCouleur();
-                scores[k]+=j.inGame();
-                j.setNumTour(0);
-                clearConsole();
-                System.out.println("Le Joueur "+noms[k]+" a trouvé !\n\n");
-                System.out.println(noms[k]+" a fini son tour !\n\n");
-            }
-        }
-        clearConsole();
-        System.out.println("Classement des joueurs :");
-            wait(3000);
-        clearConsole();
-        System.out.println("Classement des joueurs :");
-        //Affichage du classement des joueurs
-        for (int i = 0; i < nbrJoueur; i++) {
-            int maxIndex = 0;
-            int maxScore = Integer.MIN_VALUE;
-    
-         
-            for (int z = 0; z < nbrJoueur; z++) {
-                if (scores[z] > maxScore) {
-                    maxScore = scores[z];
-                    maxIndex = z;
-                }
-            }
-            
-            System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
-            scores[maxIndex] = Integer.MIN_VALUE; 
-        }
-
-    }
-    public static void wait(int ms) {
-        try {
-            System.out.println("3 !\r");
-            Thread.sleep(ms/3);
-            System.out.println("2 !\r");
-            Thread.sleep(ms/3);
-            System.out.println("1 !\r");
-            Thread.sleep(ms/3);
-
-        }
-        catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
+ 
+  
 
     private void afficherRegle(){
         System.out.println("Résumé des règles du Mastermind :\n" + //
