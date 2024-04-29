@@ -22,11 +22,12 @@ public class Plateau {
     private int numTour=0;
     private boolean multi;
    
-
+    //Constructeur d'un plateau
     public Plateau(boolean multi){
         int choix,difficulty;
 
         this.multi=multi;
+        //Choix de la difficulté
         difficulty=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant):\n" + //
                         " Facile:0 \n" + //
                         " Normal:1 \n" + //
@@ -68,33 +69,7 @@ public class Plateau {
         this.plateau=new Combinaison[nbrCoups];
     }
 
-    //Méthode pour vérifier que c'est un entier
-    private int obtenirEntier(String message) {
-        while (true) {
-            try {
-                return Integer.parseInt(System.console().readLine(message));
-            } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer un entier valide.");
-            }
-        }
-    }
     
-    //Méthode pour vérifier que c'est choix
-    private int obtenirChoix(int min, int max, String message) {
-        int choix;
-        do {
-            choix = obtenirEntier(message);
-        } while (choix < min || choix > max);
-        return choix;
-    }
-
-    //Méthode pour clear la console
-    private void clearConsole() {
-        final String ESC = "\033[";
-        System.out.print (ESC + "2J");
-        System.out.print (ESC + "0;0H");
-        System.out.flush();
-    }
 
     public int inGame(){
         Combinaison combinaison;
@@ -282,7 +257,7 @@ public class Plateau {
         this.numTour=num;
     }
 
-    
+    //Méthode pour afficher les listes de couleurs selon la difficulté
     public void afficheCouleur(){
         if(nbrCouleurs==6){
             System.out.println("Voici les choix de couleur possibles (il vous faudra entrer le nombre correspondant) , les couleurs sont  :\n" + //
@@ -306,6 +281,35 @@ public class Plateau {
         }
     }
 
+    //Méthode pour vérifier que c'est un entier
+    private int obtenirEntier(String message) {
+        while (true) {
+            try {
+                return Integer.parseInt(System.console().readLine(message));
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez entrer un entier valide.");
+            }
+        }
+    }
+    
+    //Méthode pour vérifier que c'est choix
+    private int obtenirChoix(int min, int max, String message) {
+        int choix;
+        do {
+            choix = obtenirEntier(message);
+        } while (choix < min || choix > max);
+        return choix;
+    }
+
+    //Méthode pour clear la console
+    private void clearConsole() {
+        final String ESC = "\033[";
+        System.out.print (ESC + "2J");
+        System.out.print (ESC + "0;0H");
+        System.out.flush();
+    }
+    
+    //Redéfinitionde toString pour afficher le plateau
     @Override
     public String toString() {
         String result ="";

@@ -13,7 +13,7 @@ public enum Couleur{
     private final int value;
     private final String codeCouleur;
 
-
+    //Constructeur de Couleur
     private Couleur(int value, String codeCouleur) {
         this.value = value;
         this.codeCouleur = codeCouleur;
@@ -29,6 +29,7 @@ public enum Couleur{
         return codeCouleur;
     }
 
+    //Méthode statique pour récupérer la valeur d'une couleur
     public static Couleur getCouleurByValue(int value) {
         for (Couleur couleur : Couleur.values()) {
             if (couleur.value == value) {

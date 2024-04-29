@@ -7,6 +7,7 @@ public class Combinaison{
     private Pion combinaison [];
     private final int taille;
     
+    //Constructeur de combinaison
     public Combinaison(int taille,int nbrCouleurs,boolean memeCouleur){
         this.taille=taille;
         int couleurValue;
@@ -117,6 +118,7 @@ public class Combinaison{
         }
     }
 
+    //Constructeur pour les fichiers de sauvegarde
     public Combinaison(String strCombinaison) {
         this.taille = strCombinaison.length();
         this.combinaison = new Pion[taille];
@@ -126,10 +128,7 @@ public class Combinaison{
         }
     }
 
-    public Combinaison(Pion[] combinaison,int taille ){
-        this.taille=taille;
-        this.combinaison=combinaison;
-    }
+   
 
     //Méthode pour comparer une combinaison avec le code secret
     private Object[] compare(Combinaison otherCombinaison){
@@ -160,7 +159,6 @@ public class Combinaison{
     
         // Trouver les pions de la bonne couleur mais mal placés
         for (int i = 0; i < this.taille; i++){
-            //System.out.println("Pasvu \n"+pasVu+"Combinaison \n"+otherCombinaison.combinaison[i]+"res\n"+pasVu.contains(otherCombinaison.combinaison[i]));
             //On compare si deux pion  on la meme couleur et non pas déja était vu si oui on passe la condition
             if (pasVu.contains(otherCombinaison.combinaison[i]) && comparateur.contains(otherCombinaison.combinaison[i])){
                 nbrBonneCouleur++;
@@ -203,11 +201,12 @@ public class Combinaison{
         }
         return false;
     }
-
+    //getteur de a comparaison difficuile
     public String getCompareDifficile(Combinaison otherCombinaison){
         Object comparaison[]=compare(otherCombinaison);
         return " Nombre de pion(s) bien placé(s) : " + comparaison[2] + " Nombre de bonnes couleurs mal placées : " + comparaison[3];
     }
+    //getteur de la combinaison
     public Pion[] getCombinaison(){
         return combinaison;
     }

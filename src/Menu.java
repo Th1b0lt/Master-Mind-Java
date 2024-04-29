@@ -7,9 +7,11 @@ import java.util.Random;
 import java.nio.file.*;
 import java.nio.charset.*;
 import java.io.*;
+
 public class Menu {
     private boolean jouer=true;
 
+    //Constructeur de Menu
     public Menu() {
         System.out.println("\n \nBIENVENUE DANS LE JEU DU MASTERMIND\n \n");
         while (jouer) {
@@ -73,20 +75,15 @@ public class Menu {
             }
         }
     }
-    
 
-    private void clearConsole() {
-        final String ESC = "\033[";
-        System.out.print (ESC + "2J");
-        System.out.print (ESC + "0;0H");
-        System.out.flush();
-    }
+    //Méthode pour charger une partie sauvegarder
     public int chargerPartie(Path path){
         Plateau jeu=new Plateau();
         jeu.load(path);
         return jeu.inGame();
     }
 
+    //Méthode pour lancer une partie solo
     public int lancerPartie(){
         int nbrCoupsJouer;
         Plateau j= new Plateau(false);
@@ -94,6 +91,7 @@ public class Menu {
         return nbrCoupsJouer;
     }
 
+    //Méthode pour lancer une partie multijoueur
     public void jeuMulti(){
         int nbrPartie=0,nbrJoueur=0;
         System.out.println("Mode multijoueur\n \n");
@@ -144,6 +142,7 @@ public class Menu {
             }
         }
         clearConsole();
+        //Affichage du classement des joueurs
         System.out.println("Classement des joueurs :");
         for (int i = 0; i < nbrJoueur; i++) {
             int maxIndex = 0;
@@ -157,23 +156,11 @@ public class Menu {
                 }
             }
     
-           
+            wait(3000);
             System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
             scores[maxIndex] = Integer.MIN_VALUE; // Set to min value to avoid reselection
         }
-        
-        
-        /* 
-        if(score1==score2){
-            System.out.println("Egalité bravo à vous deux ! Le score est de "+score1+"-"+score2);
-        }
-        else if(score1>score2){
-            System.out.println("Le premier joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
-        }
-        else{
-            System.out.println("Le second joueur a gagné, bravo à lui Le score est de "+score1+"-"+score2);
-        }
-        */
+
     }
     public static void wait(int ms) {
         try {
@@ -183,7 +170,8 @@ public class Menu {
             Thread.currentThread().interrupt();
         }
     }
-    public void afficherRegle(){
+
+    private void afficherRegle(){
         System.out.println("Résumé des règles du Mastermind :\n" + //
         
         "Le Mastermind est un jeu de logique qui se joue avec des pions colorés. Voici comment jouer :\n \n" + //
@@ -199,5 +187,13 @@ public class Menu {
             "Nombre de tours : Le joueur a un nombre limité de tours pour deviner la combinaison secrète.(entre 8 et 12)\n \n" +//
             "Victoire : Le joueur gagne s'il parvient à deviner la combinaison secrète dans le nombre de tours imparti.\n" + //
             "Défaite : Le joueur perd s'il n'arrive pas à deviner la combinaison secrète dans le nombre de tours imparti.\n");
+    }
+
+
+    private void clearConsole() {
+        final String ESC = "\033[";
+        System.out.print (ESC + "2J");
+        System.out.print (ESC + "0;0H");
+        System.out.flush();
     }
 }
