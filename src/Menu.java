@@ -119,7 +119,7 @@ public class Menu {
         clearConsole();
         for(int i=0;i<nbrPartie;i++){
             for (int k=0;k<nbrJoueur;k++){
-                
+                validInput2 = false;
                 if (i==0){
                     while (!validInput2) {
                         try {
@@ -141,8 +141,11 @@ public class Menu {
             }
         }
         clearConsole();
-        //Affichage du classement des joueurs
         System.out.println("Classement des joueurs :");
+            wait(3000);
+        clearConsole();
+        System.out.println("Classement des joueurs :");
+        //Affichage du classement des joueurs
         for (int i = 0; i < nbrJoueur; i++) {
             int maxIndex = 0;
             int maxScore = Integer.MIN_VALUE;
@@ -154,17 +157,21 @@ public class Menu {
                     maxIndex = z;
                 }
             }
-    
-            wait(3000);
+            
             System.out.println((i + 1) + ". " + noms[maxIndex] + " - Score: " + scores[maxIndex]);
             scores[maxIndex] = Integer.MIN_VALUE; 
-            wait(200);
         }
 
     }
     public static void wait(int ms) {
         try {
-            Thread.sleep(ms);
+            System.out.println("3 !\r");
+            Thread.sleep(ms/3);
+            System.out.println("2 !\r");
+            Thread.sleep(ms/3);
+            System.out.println("1 !\r");
+            Thread.sleep(ms/3);
+
         }
         catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
@@ -189,7 +196,9 @@ public class Menu {
             "Défaite : Le joueur perd s'il n'arrive pas à deviner la combinaison secrète dans le nombre de tours imparti.\n");
     }
 
-
+    private static void clearLigne(){
+        System.out.print("\033[1A\033[K");
+    }
     private void clearConsole() {
         final String ESC = "\033[";
         System.out.print (ESC + "2J");

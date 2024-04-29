@@ -159,7 +159,7 @@ public class Combinaison{
     
         // Trouver les pions de la bonne couleur mais mal placés
         for (int i = 0; i < this.taille; i++){
-            //On compare si deux pion  on la meme couleur et non pas déja était vu si oui on passe la condition
+            //On compare si deux pion  on la meme couleur et il non pas déja été vu si oui on passe la condition
             if (pasVu.contains(otherCombinaison.combinaison[i]) && comparateur.contains(otherCombinaison.combinaison[i])){
                 nbrBonneCouleur++;
                 bonneCouleur.add(otherCombinaison.combinaison[i]);
