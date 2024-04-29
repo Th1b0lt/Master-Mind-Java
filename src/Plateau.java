@@ -28,12 +28,12 @@ public class Plateau {
 
         this.multi=multi;
         //Choix de la difficulté
-        difficulty=Integer.parseInt(System.console().readLine("Choisissez la difficulté(taper le nombre correspondant):\n" + //
+        difficulty=obtenirChoix(0,4,"Choisissez la difficulté(taper le nombre correspondant):\n" + //
                         " Facile:0 \n" + //
                         " Normal:1 \n" + //
                         " Difficile:2\n" + //
                         " Très difficile:3\n" + //
-                        " Personnalisé:4\n"));
+                        " Personnalisé:4\n");
         System.out.println("\n");
         this.difficulty=difficulty;
         switch(difficulty){
