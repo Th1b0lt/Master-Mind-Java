@@ -9,10 +9,9 @@ import java.nio.charset.*;
 import java.io.*;
 
 public class Menu {
-    private boolean jouer=true;
-
     //Constructeur de Menu
     public Menu() {
+        boolean jouer=true;
         System.out.println("\n \nBIENVENUE DANS LE JEU DU MASTERMIND\n \n");
         while (jouer) {
             String reponse;
@@ -119,8 +118,6 @@ public class Menu {
         return nbrCoupsJouer;
     }
 
- 
-  
 
     private void afficherRegle(){
         System.out.println("Résumé des règles du Mastermind :\n" + //

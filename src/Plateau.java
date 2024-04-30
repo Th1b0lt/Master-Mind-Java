@@ -10,10 +10,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Plateau {
-    private ArrayList<Couleur> listeCouleurs;
     private Combinaison[] plateau;
-    private  Combinaison codeSecret;
-    private boolean fin=false;
+    private Combinaison codeSecret;
     private int difficulty;
     private int nbrCouleurs=8;
     private int nbrPionts=4;
@@ -75,8 +73,8 @@ public class Plateau {
     public int inGame(){
         Combinaison combinaison;
         boolean res;
+        boolean fin=false;
         Scanner scanner = new Scanner(System.in);
-        this.fin=false;
         //Decomenter pour tester
         //System.out.println(" la combinaison est : "+ codeSecret.toString());
         System.out.println("Donnez votre combinaison:\n Tour " + (this.numTour +1 ) + " / " + nbrCoups);

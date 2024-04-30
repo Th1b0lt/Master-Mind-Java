@@ -71,7 +71,7 @@ public class JeuMulti{
             for (int k=this.joueurActuel;k<this.nbrJoueur;k++){
                 this.joueurActuel=k;
                 System.out.println("TOUR DE "+noms[k].toUpperCase()+" \n \n");
-                j.afficheCouleur();
+                System.out.println(j.afficheCouleur());
                 scores[k]+=j.inGame();
                 j.setNumTour(0);
                 if (!(i==nbrPartie-1 && k==nbrJoueur-1)){
@@ -152,7 +152,7 @@ public class JeuMulti{
         }
     }
 
-
+    
     public void saveMulti(Path path){
         try {
             ArrayList<String> lines = j.enregistre();
